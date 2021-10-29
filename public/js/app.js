@@ -5,19 +5,22 @@ $(document).ready(function (){
 
         var Id = $(this).attr("data-id");
         var Url = "/edit"+Id
-        $('#form').attr("action",Url);
+        $('#formEdit').attr("action",Url);
 
-        $('#name').val($(this).attr("data-id"));
+        // $('#name').val($(this).attr("data-id"));
         $('#name').val($(this).attr("data-name"));
         $('#price').val($(this).attr("data-price"));
-        
+
         $('#description').val($(this).attr("data-description"));
     })
 })
 
-// $(document).ready(function (){
-//     $('.addBtn').on('click', function (){
-//         $('#myModalAdd').modal('show');
-//
-//     })
-// })
+$(document).ready(function (){
+    $('.deleteBtn').on('click', function (){
+        $('#myModalDelete').modal('show');
+
+        var Id = $(this).attr("delete-id");
+        var Url = "/delete"+Id
+        $('#formDelete').attr("action",Url);
+    })
+})

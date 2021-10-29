@@ -139,17 +139,15 @@
                                     <p class="mb-0 text-muted text-small w-15 w-xs-100">{{ product.productDescription }}</p>
 {#                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">{{ product.createdAt }}</p>#}
                                     <div class="w-15 w-xs-100">
-                                        <span class="badge badge-pill badge-secondary">ON HOLD</span>
-                                        <span class="badge badge-pill badge-secondary">
-                                            <button type="button" class="editBtn" data-id="{{product.id}}" data-name="{{product.productName}}" data-price="{{product.productPrice}}" data-description="{{product.productDescription}}" > EditBtn</button>
-
-{#                                            <a href="{{ path('app_edit', {id: product.id}) }}" class="editBtn" id="ModalDevis" data-toggle="modal" data-target="#myModal">Edit</a>#}
-{#                                            <a href="#" class="btn btn-secondary " id="ModalDevis" data-toggle="modal" data-target="#myModal" >DEMANDEZ VOTRE DEVIS</a>#}
-                                        </span>
-                                        <span class="badge badge-pill badge-secondary">
-                                            <a href="{{ path('app_delete', {id: product.id}) }}">Delete</a>
-                                        </span>
-
+{#                                        <span class="badge badge-pill badge-secondary">ON HOLD</span>#}
+                                        <button type="button" class="editBtn badge badge-pill badge-secondary border-0 font-weight-bold" data-id="{{product.id}}"
+                                                data-name="{{product.productName}}" data-price="{{product.productPrice}}" data-description="{{product.productDescription}}" >
+                                        Edit
+                                        </button>
+{#                                        <a href="{{ path('app_delete', {id: product.id}) }}">#}
+                                            <button type="button" class="deleteBtn badge badge-pill badge-secondary border-0 font-weight-bold" delete-id="{{product.id}}" >Delete</button>
+{#                                        </a>#}
+{#                                        <button type="button" class="badge badge-pill badge-secondary border-0 font-weight-bold" href="{{ path('app_delete', {id: product.id}) }}">Delete</button>#}
                                     </div>
                                 </div>
                                 <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
@@ -160,6 +158,7 @@
                         </div>
                     {% endfor %}
 
+                    {#      MODAL OF ADD        #}
                     <div id="myModalAdd" class="modal fade" role="dialog">
                         <div class="modal-dialog modal-lg">
 
@@ -176,49 +175,22 @@
                                 <div class="modal-body">
                                     <div class="container">
                                         <div class="row col-md-12">
-                                            <div class="my-form devis" >
-                                                {#                                                {{ form_start(form) }}#}
-                                                {#                                                {{ form_widget(form) }}#}
-                                                {#                                                <input type="submit" value="Envoyer" class="btn btn-info btn-inline" formnovalidate>#}
-                                                {#                                                <input type="reset" value="Annuler" class="btn btn-info btn-inline" data-dismiss="modal">#}
-                                                {#                                                {{ form_end(form) }}#}
-
+                                            <div class="my-form " >
                                                 {{ form_start(CreateForm) }}
-                                                <label class="form-group has-float-label mb-4">
+                                                <label class="form-group has-float-label mb-4 h6">
                                                     {{ form_row(CreateForm.productName) }}
-                                                </label>
-                                                <label class="form-group has-float-label mb-4">
+                                                </label><br>
+                                                <label class="form-group has-float-label mb-4 h6">
                                                     {{ form_row(CreateForm.productPrice)}}
-                                                </label>
-                                                <label class="form-group has-float-label mb-4">
+                                                </label><br>
+                                                <label class="form-group has-float-label mb-4 h6">
                                                     {{ form_row(CreateForm.productDescription) }}
-                                                </label>
+                                                </label><br>
                                                 <div class="d-flex justify-content-end align-items-center">
                                                     <button class="btn btn-primary btn-lg btn-shadow" type="submit">Create Produit</button>
                                                 </div>
                                                 {{ form_end(CreateForm) }}
                                             </div>
-
-
-
-{#                                            <form action="" method="POST" id="form" class="devis">#}
-{#                                                #}{#                                                    {{ path("app_edit") }#}
-{#                                                <input type="hidden" name="demandededevis">#}
-{#                                                <div class="form-group">#}
-{#                                                    <input type="text"  id="name" class="form-control chp" placeholder="Nom et Prénom" name="nomClient" required>#}
-{#                                                </div>#}
-{#                                                <div class="form-group">#}
-{#                                                    <input type="text"  id="price" class="form-control chp" placeholder="Price" name="Price" required>#}
-{#                                                </div>#}
-{#                                                <div class="form-group">#}
-{#                                                    <input type="text"  id="description" class="form-control chp" placeholder="description" name="description" required>#}
-{#                                                </div>#}
-{#                                                <div class="msgerreur"></div>#}
-{#                                                <div class="form-group bts">#}
-{#                                                    <button type="submit" class="btn btn-indo" >Envoyer</button>#}
-{#                                                    <button type="reset"  class="btn btn-info raf" data-dismiss="modal">Annuler</button>#}
-{#                                                </div>#}
-{#                                            </form>#}
                                         </div>
                                     </div>
                                 </div>
@@ -227,6 +199,8 @@
 
                         </div>
                     </div>
+
+                    {#      MODAL OF EDIT       #}
                     <div id="myModal" class="modal fade" role="dialog">
                         <div class="modal-dialog modal-lg">
 
@@ -234,7 +208,7 @@
                             <div class="modal-content">
 
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Demande de Devis</h5>
+                                    <h5 class="modal-title font-weight-bold ml-3 h3">Edit Product</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -243,49 +217,31 @@
                                 <div class="modal-body">
                                     <div class="container">
                                         <div class="row col-md-12">
-                                            <div class="my-form devis" >
-{#                                                {{ form_start(form) }}#}
-{#                                                {{ form_widget(form) }}#}
-{#                                                <input type="submit" value="Envoyer" class="btn btn-info btn-inline" formnovalidate>#}
-{#                                                <input type="reset" value="Annuler" class="btn btn-info btn-inline" data-dismiss="modal">#}
-{#                                                {{ form_end(form) }}#}
-
-{#                                                {{ form_start(CreateForm) }}#}
-{#                                                <label class="form-group has-float-label mb-4">#}
-{#                                                    {{ form_row(CreateForm.productName) }}#}
-{#                                                </label>#}
-{#                                                <label class="form-group has-float-label mb-4">#}
-{#                                                    {{ form_row(CreateForm.productPrice)}}#}
-{#                                                </label>#}
-{#                                                <label class="form-group has-float-label mb-4">#}
-{#                                                    {{ form_row(CreateForm.productDescription) }}#}
-{#                                                </label>#}
-{#                                                <div class="d-flex justify-content-end align-items-center">#}
-{#                                                    <button class="btn btn-primary btn-lg btn-shadow" type="submit">Create Produit</button>#}
-{#                                                </div>#}
-{#                                                {{ form_end(CreateForm) }}#}
+                                            <div class="my-form" >
+                                                <form action="" method="POST" id="formEdit">
+                                                    <div class="form-group">
+                                                        <label for="name" class="form-group has-float-label h6">Product Name</label>
+                                                        <input type="text"  id="name" class="form-control chp" placeholder="Nom et Prénom" name="nomClient" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="price" class="form-group has-float-label h6">Product Price</label>
+                                                        <input type="text"  id="price" class="form-control chp" placeholder="Price" name="Price" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="description" class="form-group has-float-label h6">Product description</label>
+                                                        <input type="text"  id="description" class="form-control chp" placeholder="description" name="description" required>
+                                                    </div>
+                                                    <div class="msgerreur"></div>
+                                                    <div class="d-flex justify-content-end align-items-center mt-5">
+                                                        <button class="btn btn-primary btn-lg btn-shadow mr-2" type="submit">Edit</button>
+                                                        <button type="reset"  class="btn btn-primary btn-lg btn-shadow" data-dismiss="modal">Cancel</button>
+                                                    </div>
+{#                                                    <div class="form-group bts">#}
+{#                                                        <button type="submit" class="btn btn-indo" >Envoyer</button>#}
+{#                                                        <button type="reset"  class="btn btn-info raf" data-dismiss="modal">Annuler</button>#}
+{#                                                    </div>#}
+                                                </form>
                                             </div>
-
-
-
-                                             <form action="" method="POST" id="form" class="devis">
-{#                                                    {{ path("app_edit") }#}
-                                                <input type="hidden" name="demandededevis">
-                                                <div class="form-group">
-                                                    <input type="text"  id="name" class="form-control chp" placeholder="Nom et Prénom" name="nomClient" required>
-                                                </div>
-                                                 <div class="form-group">
-                                                     <input type="text"  id="price" class="form-control chp" placeholder="Price" name="Price" required>
-                                                 </div>
-                                                 <div class="form-group">
-                                                     <input type="text"  id="description" class="form-control chp" placeholder="description" name="description" required>
-                                                 </div>
-                                                <div class="msgerreur"></div>
-                                                <div class="form-group bts">
-                                                    <button type="submit" class="btn btn-indo" >Envoyer</button>
-                                                    <button type="reset"  class="btn btn-info raf" data-dismiss="modal">Annuler</button>
-                                                </div>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -295,7 +251,42 @@
                         </div>
                     </div>
 
+                    {#      MODAL OF DELETE      #}
+                    <div id="myModalDelete" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-lg">
 
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Delete Product</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="row col-md-12">
+                                            <div class="my-form" >
+                                                <h1>Delete ?</h1>
+                                                <form action="" method="POST" id="formDelete">
+                                                    <div class="d-flex justify-content-end align-items-center mt-5">
+    {#                                                    <a href="{{ path('app_delete', {id: product.id}) }}">#}
+                                                            <button class="btn btn-primary btn-lg btn-shadow mr-2" type="submit" >Delete</button>
+    {#                                                    </a>#}
+                                                        <button type="reset"  class="btn btn-primary btn-lg btn-shadow" data-dismiss="modal">Cancel</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
                     <nav class="mt-4 mb-3">
                         <ul class="pagination justify-content-center mb-0">
                             <li class="page-item ">

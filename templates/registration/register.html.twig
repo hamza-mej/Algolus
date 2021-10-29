@@ -66,33 +66,40 @@
                             </p>
                         </div>
                         <div class="form-side">
-                            <a href="Dashboard.Default.html">
+                            <a href="{{ path('app_dashboard') }}">
                                 <span class="logo-single"></span>
                             </a>
                             <h6 class="mb-4">Register</h6>
 
 {#                            <form >#}
                                 {{ form_start(registrationForm) }}
-                                <label class="form-group has-float-label mb-4">
+                                <label class="form-group has-float-label mb-4 mr-4">
                                     {{ form_row(registrationForm.first_name, {
-                                        label: 'Nom'
+                                        label: 'Nom',
+                                        'attr': {'class': 'form-control'},
                                     }) }}
                                 </label>
                                 <label class="form-group has-float-label mb-4">
                                     {{ form_row(registrationForm.last_name, {
-                                        label: 'Prenom'
+                                        label: 'Prenom',
+                                        'attr': {'class': 'form-control'},
                                     }) }}
                                 </label>
-                                <label class="form-group has-float-label mb-4">
-                                    {{ form_row(registrationForm.email) }}
+                                <label class="form-group has-float-label mb-4 mr-4">
+                                    {{ form_row(registrationForm.email, {
+                                        'attr': {'class': 'form-control'},
+                                    }) }}
                                 </label>
                                 <label class="form-group has-float-label mb-4">
                                     {{ form_row(registrationForm.plainPassword, {
-                                        label: 'Password'
+                                        label: 'Password',
+                                        'attr': {'class': 'form-control'},
                                     }) }}
                                 </label>
-                                <label class="form-group has-float-label mb-4">
-                                    {{ form_row(registrationForm.agreeTerms) }}
+                                <label class="form-group has-float-label mb-4 d-block ">
+                                    {{ form_row(registrationForm.agreeTerms, {
+                                        'attr': {'class': 'ml-2'},
+                                    }) }}
                                 </label>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <a href="{{ path('app_login') }}">Sign In?</a>

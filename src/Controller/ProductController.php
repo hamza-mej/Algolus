@@ -90,7 +90,7 @@ class ProductController extends AbstractController
 //        ]);
     }
 
-    #[Route('/delete/{id}', name: 'app_delete')]
+    #[Route('/delete{id}', name: 'app_delete', methods: ['GET','POST'])]
     public function delete(EntityManagerInterface $em, Product $product): Response
     {
         $em->remove($product);

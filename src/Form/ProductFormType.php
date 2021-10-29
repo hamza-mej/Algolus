@@ -14,11 +14,12 @@ class ProductFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('productName')
-            ->add('productPrice')
+            ->add('productName', null, [ 'attr' => ['class' => 'd-block', 'class' => 'form-control' ]])
+//            , array('attr' => array('class' => 'form-control','style' => 'margin-right:5px'))
+            ->add('productPrice', null, [ 'attr' => ['class' => 'd-block', 'class' => 'form-control']])
 //            ->add('productImage')
 //            ->add('productTaxe')
-            ->add('productDescription')
+            ->add('productDescription', null, [ 'attr' => ['class' => 'd-block', 'class' => 'form-control']])
 //            ->add('createdAt')
 //            ->add('updatedAt')
         ;
