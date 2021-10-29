@@ -10,7 +10,8 @@ $(document).ready(function (){
         $('#name').val($(this).attr("data-id"));
         $('#name').val($(this).attr("data-name"));
         $('#price').val($(this).attr("data-price"));
-        $('#description').val($(this).attr("data-description"));git add -A
+        
+        $('#description').val($(this).attr("data-description"));
     })
 })
 
