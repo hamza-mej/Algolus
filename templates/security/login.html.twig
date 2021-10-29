@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{% block title %}Log in!{% endblock %}</title>
+    {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('/font/iconsmind-s/css/iconsminds.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/font/simple-line-icons/css/simple-line-icons.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/css/vendor/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/css/vendor/bootstrap.rtl.only.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/css/vendor/fullcalendar.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/css/vendor/dataTables.bootstrap4.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/css/vendor/datatables.responsive.bootstrap4.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/css/vendor/select2.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/css/vendor/perfect-scrollbar.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/css/vendor/glide.core.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/css/vendor/bootstrap-stars.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/css/vendor/nouislider.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/css/vendor/bootstrap-datepicker3.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/css/vendor/component-custom-switch.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/css/main.css') }}" />
+    {% endblock %}
+
+    {% block javascripts %}
+        <script src="{{ asset('/js/vendor/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ asset('/js/vendor/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('/js/vendor/Chart.bundle.min.js') }}"></script>
+        <script src="{{ asset('/js/vendor/chartjs-plugin-datalabels.js') }}"></script>
+        <script src="{{ asset('/js/vendor/moment.min.js') }}"></script>
+        <script src="{{ asset('/js/vendor/fullcalendar.min.js') }}"></script>
+        <script src="{{ asset('/js/vendor/datatables.min.js') }}"></script>
+        <script src="{{ asset('/js/vendor/perfect-scrollbar.min.js') }}"></script>
+        <script src="{{ asset('/js/vendor/progressbar.min.js') }}"></script>
+        <script src="{{ asset('/js/vendor/jquery.barrating.min.js') }}"></script>
+        <script src="{{ asset('/js/vendor/select2.full.js') }}"></script>
+        <script src="{{ asset('/js/vendor/nouislider.min.js') }}"></script>
+        <script src="{{ asset('/js/vendor/bootstrap-datepicker.js') }}"></script>
+        <script src="{{ asset('/js/vendor/Sortable.js') }}"></script>
+        <script src="{{ asset('/js/vendor/mousetrap.min.js') }}"></script>
+        <script src="{{ asset('/js/vendor/glide.min.js') }}"></script>
+        <script src="{{ asset('/js/dore.script.js') }}"></script>
+        <script src="{{ asset('/js/scripts.js') }}"></script>
+    {% endblock %}
+</head>
+
+
+{% block body %}
+    <body class="background show-spinner no-footer">
+    <div class="fixed-background"></div>
+    <main>
+        <div class="container">
+            <div class="row h-100">
+                <div class="col-12 col-md-10 mx-auto my-auto">
+                    <div class="card auth-card">
+                        <div class="position-relative image-side ">
+
+                            <p class=" text-white h2">MAGIC IS IN THE DETAILS</p>
+
+                            <p class="white mb-0">
+                                Please use your credentials to login.
+                                <br>If you are not a member, please
+                                <a href="#" class="white">register</a>.
+                            </p>
+                        </div>
+                        <div class="form-side">
+                            <a href="{{ path('app_dashboard') }}">
+                                <span class="logo-single"></span>
+                            </a>
+                            <h6 class="mb-4">Login</h6>
+                            <form method="post">
+                                {% if error %}
+                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                {% endif %}
+
+                                {% if app.user %}
+                                    <div class="mb-3">
+                                        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                    </div>
+                                {% endif %}
+                                <label for="inputEmail" class="form-group has-float-label mb-4">
+                                    {#                                    <input class="form-control" />#}
+                                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                                    <span>E-mail</span>
+                                </label>
+
+                                <label for="inputPassword" class="form-group has-float-label mb-4">
+                                    {#                                    <input class="form-control" type="password" placeholder="" />#}
+                                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                                    <span>Password</span>
+                                </label>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a href="#">Forget password?</a>
+                                    <a href="{{ path('app_register') }}">Sign Up?</a>
+                                    <button class="btn btn-primary btn-lg btn-shadow" type="submit">LOGIN</button>
+                                </div>
+
+                                <input type="hidden" name="_csrf_token"
+                                       value="{{ csrf_token('authenticate') }}"
+                                >
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="js/dore.script.js"></script>
+    <script src="js/scripts.js"></script>
+    </body>
+{% endblock %}

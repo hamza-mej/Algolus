@@ -1,0 +1,158 @@
+
+
+{#{% block body %}#}
+{#    <main>#}
+{#        <div id="myModal" class="modal fade" role="dialog">#}
+{#                                    <div class="modal-dialog modal-lg">#}
+
+{#                                        <!-- Modal content-->#}
+{#                                        <div class="modal-content">#}
+
+{#                                            <div class="modal-header">#}
+{#                                                <h5 class="modal-title">Demande de Devis</h5>#}
+{#                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                                                    <span aria-hidden="true">&times;</span>#}
+{#                                                </button>#}
+{#                                            </div>#}
+
+{#                                            <div class="modal-body">#}
+{#                                                <div class="container">#}
+{#                                                    <div class="row col-md-12">#}
+{#                                                        <div class="my-form devis" >#}
+{#                                                            {{ form_start(form) }}#}
+{#                                                            {{ form_widget(form) }}#}
+{#                                                            <input type="submit" value="Envoyer" class="btn btn-info btn-inline" formnovalidate>#}
+{#                                                            <input type="reset" value="Annuler" class="btn btn-info btn-inline" data-dismiss="modal">#}
+{#                                                            {{ form_end(form) }}#}
+
+{#                                                            {{ form_start(EditForm) }}#}
+{#                                                            <label class="form-group has-float-label mb-4">#}
+{#                                                                {{ form_row(EditForm.productName) }}#}
+{#                                                            </label>#}
+{#                                                            <label class="form-group has-float-label mb-4">#}
+{#                                                                {{ form_row(EditForm.productPrice)}}#}
+{#                                                            </label>#}
+{#                                                            <label class="form-group has-float-label mb-4">#}
+{#                                                                {{ form_row(EditForm.productDescription) }}#}
+{#                                                            </label>#}
+{#                                                            <div class="d-flex justify-content-end align-items-center">#}
+{#                                                                <button class="btn btn-primary btn-lg btn-shadow" type="submit">Create Produit</button>#}
+{#                                                            </div>#}
+{#                                                            {{ form_end(EditForm) }}#}
+{#                                                        </div>#}
+
+{#                                                         <div class="successDevis">#}
+{#                                         <p> Votre Demande a été envoyée avec succèe.  </p>#}
+{#                                        <p>Notre assistant traitera soigneusement votre demande et vous répondera dans les plus brefs délais.</p>#}
+{#                                        <button type="reset" class="btn btn-default" data-dismiss="modal">Fermer</button>#}
+{#                                    </div>#}
+
+
+{#                                                         <form  class="devis">#}
+{#                                                <input type="hidden" name="demandededevis">#}
+{#                                                <div class="form-group">#}
+{#                                                    <input type="text" class="form-control chp" placeholder="Nom et Prénom" name="nomClient" required>#}
+{#                                                </div>#}
+{#                                                <div class="form-group">#}
+{#                                                    <input type="email" class="form-control chp" placeholder="test@exemple.com" name="mailClient" required>#}
+{#                                                </div>#}
+{#                                                <div class="form-group">#}
+{#                                                    <input type="tel" class="form-control chp"  placeholder="Numéro téléphone" name="phoneClient" required>#}
+{#                                                </div>#}
+{#                                                <div class="form-group">#}
+{#                                                    <input type="text" class="form-control chp"  placeholder="Ville" name="ville" required>#}
+{#                                                </div>#}
+{#                                                <div class="form-group">#}
+{#                                                    <textarea class="form-control chp" rows="10" cols="40" placeholder="Description de votre demande" name="demandeClient" required></textarea>#}
+{#                                                </div>#}
+{#                                                <div class="msgerreur"></div>#}
+{#                                                <div class="form-group bts">#}
+{#                                                    <button type="submit" class="btn btn-indo" >Envoyer</button>#}
+{#                                                    <button type="reset"  class="btn btn-info raf" data-dismiss="modal">Annuler</button>#}
+{#                                                </div>#}
+{#                                            </form>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+
+{#                                        </div>#}
+
+{#                                    </div>#}
+{#        </div>#}
+{#        <div class="container-fluid disable-text-selection">#}
+{#            <div class="row">#}
+{#                <div class="col-12">#}
+{#                    <div class="mb-2">#}
+{#                        <h1>Product List</h1>#}
+{#                        <div class="top-right-button-container">#}
+{#                            <a href="{{ path('app_product') }}">#}
+{#                                <button type="button" class="btn btn-primary btn-lg top-right-button mr-1">View List</button>#}
+{#                            </a>#}
+{#                        </div>#}
+{#                        <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">#}
+{#                            <ol class="breadcrumb pt-0">#}
+{#                                <li class="breadcrumb-item">#}
+{#                                    <a href="#">Home</a>#}
+{#                                </li>#}
+{#                                <li class="breadcrumb-item">#}
+{#                                    <a href="#">Library</a>#}
+{#                                </li>#}
+{#                                <li class="breadcrumb-item active" aria-current="page">Data</li>#}
+{#                            </ol>#}
+{#                        </nav>#}
+{#                    </div>#}
+
+{#                    <div class="separator mb-5"></div>#}
+{#                </div>#}
+{#            </div>#}
+
+{#            <div class="form-side">#}
+{#                <a href="Dashboard.Default.html">#}
+{#                    <span class="logo-single"></span>#}
+{#                </a>#}
+{#                <h3 class="mb-4">Edit Product #{{ product.id }}</h3>#}
+
+{#                {{ form_start(EditForm) }}#}
+{#                <label class="form-group has-float-label mb-4">#}
+{#                    {{ form_row(EditForm.productName) }}#}
+{#                </label>#}
+{#                <label class="form-group has-float-label mb-4">#}
+{#                    {{ form_row(EditForm.productPrice)}}#}
+{#                </label>#}
+{#                <label class="form-group has-float-label mb-4">#}
+{#                    {{ form_row(EditForm.productDescription) }}#}
+{#                </label>#}
+{#                <div class="d-flex justify-content-end align-items-center">#}
+{#                    <button class="btn btn-primary btn-lg btn-shadow" type="submit">Create Produit</button>#}
+{#                </div>#}
+{#                {{ form_end(EditForm) }}#}
+{#            </div>#}
+{#        </div>#}
+{#    </main>#}
+
+{#    <footer class="page-footer">#}
+{#        <div class="footer-content">#}
+{#            <div class="container-fluid">#}
+{#                <div class="row">#}
+{#                    <div class="col-12 col-sm-6">#}
+{#                        <p class="mb-0 text-muted">ColoredStrategies 2019</p>#}
+{#                    </div>#}
+{#                    <div class="col-sm-6 d-none d-sm-block">#}
+{#                        <ul class="breadcrumb pt-0 pr-0 float-right">#}
+{#                            <li class="breadcrumb-item mb-0">#}
+{#                                <a href="#" class="btn-link">Review</a>#}
+{#                            </li>#}
+{#                            <li class="breadcrumb-item mb-0">#}
+{#                                <a href="#" class="btn-link">Purchase</a>#}
+{#                            </li>#}
+{#                            <li class="breadcrumb-item mb-0">#}
+{#                                <a href="#" class="btn-link">Docs</a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </footer>#}
+
+{#{% endblock %}#}
