@@ -1,16 +1,31 @@
 $(document).ready(function (){
-    $('.editBtn').on('click', function (){
-        $('#myModal').modal('show');
+    $('.editBtnProduct').on('click', function (){
+        $('#myModalEditProduct').modal('show');
 
 
         var Id = $(this).attr("data-id");
-        var Url = "/edit"+Id
+        var Url = "/productedit"+Id
         $('#formEdit').attr("action",Url);
 
         // $('#name').val($(this).attr("data-id"));
         $('#name').val($(this).attr("data-name"));
         $('#price').val($(this).attr("data-price"));
 
+        $('#description').val($(this).attr("data-description"));
+    })
+});
+
+$(document).ready(function (){
+    $('.editBtnCategory').on('click', function (){
+        $('#myModalEditCategory').modal('show');
+
+
+        var Id = $(this).attr("data-id");
+        var Url = "/categoryedit"+Id
+        $('#formEditCategory').attr("action",Url);
+
+        // $('#name').val($(this).attr("data-id"));
+        $('#name').val($(this).attr("data-name"));
         $('#description').val($(this).attr("data-description"));
     })
 });

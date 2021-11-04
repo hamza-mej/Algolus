@@ -14,35 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
-//    #[Route('/product', name: 'app_product')]
-//    public function index(ProductRepository $productRepository): Response
-//    {
-//
-//        $product = $productRepository->findAll();
-//        return $this->render('dashboard/Product/index.html.twig', [
-//            'products' => $product,
-//        ]);
-//    }
-
-//    #[Route('/new', name: 'app_new')]
-//    public function new(): Response
-//    {
-//
-////        $product = $productRepository->findAll();
-//        return $this->render('dashboard/Product/new.html.twig', [
-//
-//        ]);
-//    }
-
-    #[Route('/show{id}', name: 'app_show')]
-    public function show(Product $product): Response
-    {
-
-        return $this->render('dashboard/Product/show.html.twig', [
-            'product' => $product,
-        ]);
-    }
-
     #[Route('/product', name: 'app_product')]
     public function create(ProductRepository $productRepository, Request $request,
                            EntityManagerInterface $em,PaginatorInterface $paginator): Response
@@ -70,38 +41,33 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/edit{id}', name: 'app_edit', methods: ['GET','POST'])]
+    #[Route('/productshow{id}', name: 'app_show_product')]
+    public function show(Product $product): Response
+    {
+
+        return $this->render('dashboard/Product/show.html.twig', [
+            'product' => $product,
+        ]);
+    }
+
+
+    #[Route('/productedit{id}', name: 'app_edit_product', methods: ['GET','POST'])]
     public function edit(Request $request,EntityManagerInterface $em,Product $product): Response
     {
 
         if($request->request){
-            $product->setProductName($request->get("nomClient"));
-            $product->setProductPrice($request->get("Price"));
-            $product->setProductDescription($request->get("description"));
+            $product->setProductName($request->get("nomCategory"));
+            $product->setProductPrice($request->get("nomPrice"));
+            $product->setProductDescription($request->get("nomDescription"));
 
         }
         $em->flush();
         return $this->redirectToRoute('app_product');
-
-
-//        $form = $this->createForm(ProductFormType::class, $product);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $em->flush();
-//
-//            return $this->redirectToRoute('app_product');
-//        }
-//        return $this->render('dashboard/Product/edit.html.twig', [
-//            'product' => $product,
-////            'EditForm' => $form->createView(),
-//        ]);
     }
 
-    #[Route('/delete{id}', name: 'app_delete', methods: ['GET','POST'])]
+    #[Route('/productdelete{id}', name: 'app_delete_product', methods: ['GET','POST'])]
     public function delete(EntityManagerInterface $em, Product $product): Response
     {
-        dd('dd');
         $em->remove($product);
         $em->flush();
 

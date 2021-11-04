@@ -22,6 +22,7 @@ class ProductFormType extends AbstractType
             ->add('productDescription', null, [ 'attr' => ['class' => 'd-block', 'class' => 'form-control']])
 //            ->add('createdAt')
 //            ->add('updatedAt')
+//            ->add('category')
         ;
     }
 

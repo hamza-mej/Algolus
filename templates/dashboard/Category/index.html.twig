@@ -9,14 +9,14 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mb-2">
-                        <h1>Product List</h1>
+                        <h1>Category List</h1>
                         <div class="top-right-button-container">
-{#                            <a href="">#}
-{#                                {{ path("app_create") }}#}
-                                <button type="button" class="addBtn btn btn-primary btn-lg top-right-button mr-1" data-toggle="modal" data-target="#myModalAddProduct">ADD NEW</button>
-{#                            </a>#}
-{#                            {{ render(controller('App\\Controller\\ProductController::create')) }}#}
-{#                            {{ render(controller('App:Controller:ProductController:create')) }}#}
+                            {#                            <a href="">#}
+                            {#                                {{ path("app_create") }}#}
+                            <button type="button" class="addBtn btn btn-primary btn-lg top-right-button mr-1" data-toggle="modal" data-target="#myModalAddCategory">ADD NEW</button>
+                            {#                            </a>#}
+                            {#                            {{ render(controller('App\\Controller\\CategoryController::create')) }}#}
+                            {#                            {{ render(controller('App:Controller:CategoryController:create')) }}#}
                             <div class="btn-group">
                                 <div class="btn btn-primary btn-lg pl-4 pr-0 check-button">
                                     <label class="custom-control custom-checkbox mb-0 d-inline-block">
@@ -127,35 +127,34 @@
 
             <div class="row">
                 <div class="col-12 list" data-check-all="checkAll">
-                    {% for product in products %}
+                    {% for category in categories %}
                         <div class="card d-flex flex-row mb-3">
                             <div class="d-flex flex-grow-1 min-width-zero">
                                 <div
                                         class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
-                                    <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="{{ path('app_show_product', {id: product.id}) }}">
-                                        {{ product.productName }}
+                                    <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="{{ path('app_show_category', {id: category.id}) }}">
+                                        {{ category.categoryName }}
                                     </a>
-                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">{{ product.productPrice }}</p>
-                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">{{ product.productDescription }}</p>
-{#                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">{{ product.createdAt }}</p>#}
+                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">{{ category.categoryDescription }}</p>
+                                    {#                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">{{ category.createdAt }}</p>#}
                                     <div class="w-15 w-xs-100">
-{#                                        <span class="badge badge-pill badge-secondary">ON HOLD</span>#}
-                                        <button type="button" class="editBtnProduct badge badge-pill badge-secondary border-0 font-weight-bold" data-id="{{product.id}}"
-                                                data-name="{{product.productName}}" data-price="{{product.productPrice}}" data-description="{{product.productDescription}}" >
-                                        Edit
+                                        {#                                        <span class="badge badge-pill badge-secondary">ON HOLD</span>#}
+                                        <button type="button" class="editBtnCategory badge badge-pill badge-secondary border-0 font-weight-bold" data-id="{{category.id}}"
+                                                data-name="{{category.categoryName}}" data-description="{{category.categoryDescription}}" >
+                                            Edit
                                         </button>
-{#                                        <a href="{{ path('app_delete', {id: product.id}) }}">#}
-{#                                            <button type="button"   class="deleteBtn badge badge-pill badge-secondary border-0 font-weight-bold delete-article" data-id="{{product.id}}" >Delete</button>#}
-{#                                        <a href="#" onclick="myFunction(this)" data-url="{{ path('app_delete', {'id': product.id}) }}" class="btn btn-white" data-toggle="tooltip" data-toggle="tooltip" data-placement="top" title="Delete">#}
-{#                                            <i class="fa fa-trash">Delete</i>#}
-{#                                        </a>#}
-{#                                        </a>#}
-                                        <a href="{{ path('app_delete_product', {id: product.id}) }}"
+                                        {#                                        <a href="{{ path('app_delete', {id: category.id}) }}">#}
+{#                                        <button type="button"   class="deleteBtn badge badge-pill badge-secondary border-0 font-weight-bold delete-article" data-id="{{category.id}}" >Delete</button>#}
+                                        {#                                        <a href="#" onclick="myFunction(this)" data-url="{{ path('app_delete', {'id': category.id}) }}" class="btn btn-white" data-toggle="tooltip" data-toggle="tooltip" data-placement="top" title="Delete">#}
+                                        {#                                            <i class="fa fa-trash">Delete</i>#}
+                                        {#                                        </a>#}
+                                        {#                                        </a>#}
+                                        <a href="{{ path('app_delete_category', {id: category.id}) }}"
                                            onclick="return confirm('are u sure?')" class="btn badge badge-pill badge-secondary border-0 font-weight-bold"
                                            data-toggle="tooltip" data-toggle="tooltip" data-placement="top" title="Delete">
                                             <i class="fa fa-trash">Delete</i>
                                         </a>
-{#                                        <button type="button" class="badge badge-pill badge-secondary border-0 font-weight-bold" href="{{ path('app_delete', {id: product.id}) }}">Delete</button>#}
+                                        {#                                        <button type="button" class="badge badge-pill badge-secondary border-0 font-weight-bold" href="{{ path('app_delete', {id: category.id}) }}">Delete</button>#}
                                     </div>
                                 </div>
                                 <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
@@ -167,14 +166,14 @@
                     {% endfor %}
 
                     {#      MODAL OF ADD        #}
-                    <div id="myModalAddProduct" class="modal fade" role="dialog">
+                    <div id="myModalAddCategory" class="modal fade" role="dialog">
                         <div class="modal-dialog modal-lg">
 
                             <!-- Modal content-->
                             <div class="modal-content">
 
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Demande de Devis</h5>
+                                    <h5 class="modal-title">Add Ctegory</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -186,16 +185,13 @@
                                             <div class="my-form " >
                                                 {{ form_start(CreateForm) }}
                                                 <label class="form-group has-float-label mb-4 h6">
-                                                    {{ form_row(CreateForm.productName) }}
+                                                    {{ form_row(CreateForm.CategoryName) }}
                                                 </label><br>
                                                 <label class="form-group has-float-label mb-4 h6">
-                                                    {{ form_row(CreateForm.productPrice)}}
-                                                </label><br>
-                                                <label class="form-group has-float-label mb-4 h6">
-                                                    {{ form_row(CreateForm.productDescription) }}
+                                                    {{ form_row(CreateForm.CategoryDescription) }}
                                                 </label><br>
                                                 <div class="d-flex justify-content-end align-items-center">
-                                                    <button class="btn btn-primary btn-lg btn-shadow" type="submit">Create Produit</button>
+                                                    <button class="btn btn-primary btn-lg btn-shadow" type="submit">Create Category</button>
                                                 </div>
                                                 {{ form_end(CreateForm) }}
                                             </div>
@@ -209,14 +205,14 @@
                     </div>
 
                     {#      MODAL OF EDIT       #}
-                    <div id="myModalEditProduct" class="modal fade" role="dialog">
+                    <div id="myModalEditCategory" class="modal fade" role="dialog">
                         <div class="modal-dialog modal-lg">
 
                             <!-- Modal content-->
                             <div class="modal-content">
 
                                 <div class="modal-header">
-                                    <h5 class="modal-title font-weight-bold ml-3 h3">Edit Product</h5>
+                                    <h5 class="modal-title font-weight-bold ml-3 h3">Edit Category</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -226,17 +222,13 @@
                                     <div class="container">
                                         <div class="row col-md-12">
                                             <div class="my-form" >
-                                                <form action="" method="POST" id="formEdit">
+                                                <form action="" method="POST" id="formEditCategory">
                                                     <div class="form-group">
-                                                        <label for="name" class="form-group has-float-label h6">Product Name</label>
+                                                        <label for="name" class="form-group has-float-label h6">Category Name</label>
                                                         <input type="text"  id="name" class="form-control chp" placeholder="Nom et Prénom" name="nomCategory" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="price" class="form-group has-float-label h6">Product Price</label>
-                                                        <input type="text"  id="price" class="form-control chp" placeholder="Price" name="nomPrice" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="description" class="form-group has-float-label h6">Product description</label>
+                                                        <label for="description" class="form-group has-float-label h6">Category description</label>
                                                         <input type="text"  id="description" class="form-control chp" placeholder="description" name="nomDescription" required>
                                                     </div>
                                                     <div class="msgerreur"></div>
@@ -244,10 +236,10 @@
                                                         <button class="btn btn-primary btn-lg btn-shadow mr-2" type="submit">Edit</button>
                                                         <button type="reset"  class="btn btn-primary btn-lg btn-shadow" data-dismiss="modal">Cancel</button>
                                                     </div>
-{#                                                    <div class="form-group bts">#}
-{#                                                        <button type="submit" class="btn btn-indo" >Envoyer</button>#}
-{#                                                        <button type="reset"  class="btn btn-info raf" data-dismiss="modal">Annuler</button>#}
-{#                                                    </div>#}
+                                                    {#                                                    <div class="form-group bts">#}
+                                                    {#                                                        <button type="submit" class="btn btn-indo" >Envoyer</button>#}
+                                                    {#                                                        <button type="reset"  class="btn btn-info raf" data-dismiss="modal">Annuler</button>#}
+                                                    {#                                                    </div>#}
                                                 </form>
                                             </div>
                                         </div>
@@ -260,78 +252,78 @@
                     </div>
 
                     {#      MODAL OF DELETE      #}
-{#                    <div id="myModalDelete" class="modal fade" role="dialog">#}
-{#                        <div class="modal-dialog modal-lg">#}
+                    {#                    <div id="myModalDelete" class="modal fade" role="dialog">#}
+                    {#                        <div class="modal-dialog modal-lg">#}
 
-{#                            <!-- Modal content-->#}
-{#                            <div class="modal-content">#}
+                    {#                            <!-- Modal content-->#}
+                    {#                            <div class="modal-content">#}
 
-{#                                <div class="modal-header">#}
-{#                                    <h5 class="modal-title">Delete Product</h5>#}
-{#                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
-{#                                        <span aria-hidden="true">&times;</span>#}
-{#                                    </button>#}
-{#                                </div>#}
+                    {#                                <div class="modal-header">#}
+                    {#                                    <h5 class="modal-title">Delete Category</h5>#}
+                    {#                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+                    {#                                        <span aria-hidden="true">&times;</span>#}
+                    {#                                    </button>#}
+                    {#                                </div>#}
 
-{#                                <div class="modal-body">#}
-{#                                    <div class="container">#}
-{#                                        <div class="row col-md-12">#}
-{#                                            <div class="my-form" >#}
-{#                                                <h1>Delete ?</h1>#}
-{#                                                <form action="" method="POST" id="formDelete">#}
-{#                                                    <div class="d-flex justify-content-end align-items-center mt-5">#}
-{#    #}{#                                                    <a href="{{ path('app_delete', {id: product.id}) }}">#}
-{#                                                            <button class="btn btn-primary btn-lg btn-shadow mr-2" type="submit" >Delete</button>#}
-{#    #}{#                                                    </a>#}
-{#                                                        <button type="reset"  class="btn btn-primary btn-lg btn-shadow" data-dismiss="modal">Cancel</button>#}
-{#                                                    </div>#}
-{#                                                </form>#}
-{#                                            </div>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
+                    {#                                <div class="modal-body">#}
+                    {#                                    <div class="container">#}
+                    {#                                        <div class="row col-md-12">#}
+                    {#                                            <div class="my-form" >#}
+                    {#                                                <h1>Delete ?</h1>#}
+                    {#                                                <form action="" method="POST" id="formDelete">#}
+                    {#                                                    <div class="d-flex justify-content-end align-items-center mt-5">#}
+                    {#    #}{#                                                    <a href="{{ path('app_delete', {id: category.id}) }}">#}
+                    {#                                                            <button class="btn btn-primary btn-lg btn-shadow mr-2" type="submit" >Delete</button>#}
+                    {#    #}{#                                                    </a>#}
+                    {#                                                        <button type="reset"  class="btn btn-primary btn-lg btn-shadow" data-dismiss="modal">Cancel</button>#}
+                    {#                                                    </div>#}
+                    {#                                                </form>#}
+                    {#                                            </div>#}
+                    {#                                        </div>#}
+                    {#                                    </div>#}
+                    {#                                </div>#}
 
-{#                            </div>#}
+                    {#                            </div>#}
 
-{#                        </div>#}
-{#                    </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
 
-                    {% do products.setPageRange(3) %}
-                    {{ knp_pagination_render(products, 'dashboard/Product/paginator.html.twig') }}
+                    {% do categories.setPageRange(3) %}
+                    {{ knp_pagination_render(categories, 'dashboard/Category/paginator.html.twig') }}
 
-{#                    <nav class="mt-4 mb-3">#}
-{#                        <ul class="pagination justify-content-center mb-0">#}
-{#                            <li class="page-item ">#}
-{#                                <a class="page-link first" href="#">#}
-{#                                    <i class="simple-icon-control-start"></i>#}
-{#                                </a>#}
-{#                            </li>#}
-{#                            <li class="page-item ">#}
-{#                                <a class="page-link prev" href="#">#}
-{#                                    <i class="simple-icon-arrow-left"></i>#}
-{#                                </a>#}
-{#                            </li>#}
-{#                            <li class="page-item active">#}
-{#                                <a class="page-link" href="#">1</a>#}
-{#                            </li>#}
-{#                            <li class="page-item ">#}
-{#                                <a class="page-link" href="#">2</a>#}
-{#                            </li>#}
-{#                            <li class="page-item">#}
-{#                                <a class="page-link" href="#">3</a>#}
-{#                            </li>#}
-{#                            <li class="page-item ">#}
-{#                                <a class="page-link next" href="#" aria-label="Next">#}
-{#                                    <i class="simple-icon-arrow-right"></i>#}
-{#                                </a>#}
-{#                            </li>#}
-{#                            <li class="page-item ">#}
-{#                                <a class="page-link last" href="#">#}
-{#                                    <i class="simple-icon-control-end"></i>#}
-{#                                </a>#}
-{#                            </li>#}
-{#                        </ul>#}
-{#                    </nav>#}
+                    {#                    <nav class="mt-4 mb-3">#}
+                    {#                        <ul class="pagination justify-content-center mb-0">#}
+                    {#                            <li class="page-item ">#}
+                    {#                                <a class="page-link first" href="#">#}
+                    {#                                    <i class="simple-icon-control-start"></i>#}
+                    {#                                </a>#}
+                    {#                            </li>#}
+                    {#                            <li class="page-item ">#}
+                    {#                                <a class="page-link prev" href="#">#}
+                    {#                                    <i class="simple-icon-arrow-left"></i>#}
+                    {#                                </a>#}
+                    {#                            </li>#}
+                    {#                            <li class="page-item active">#}
+                    {#                                <a class="page-link" href="#">1</a>#}
+                    {#                            </li>#}
+                    {#                            <li class="page-item ">#}
+                    {#                                <a class="page-link" href="#">2</a>#}
+                    {#                            </li>#}
+                    {#                            <li class="page-item">#}
+                    {#                                <a class="page-link" href="#">3</a>#}
+                    {#                            </li>#}
+                    {#                            <li class="page-item ">#}
+                    {#                                <a class="page-link next" href="#" aria-label="Next">#}
+                    {#                                    <i class="simple-icon-arrow-right"></i>#}
+                    {#                                </a>#}
+                    {#                            </li>#}
+                    {#                            <li class="page-item ">#}
+                    {#                                <a class="page-link last" href="#">#}
+                    {#                                    <i class="simple-icon-control-end"></i>#}
+                    {#                                </a>#}
+                    {#                            </li>#}
+                    {#                        </ul>#}
+                    {#                    </nav>#}
 
 
 
