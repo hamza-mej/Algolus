@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="{{ asset('/css/vendor/bootstrap-datepicker3.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('/css/vendor/component-custom-switch.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/node_modules/sweetalert2/dist/sweetalert2.css') }}" />
     {% endblock %}
 
     {% block javascripts %}
@@ -44,6 +45,9 @@
         <script src="{{ asset('/js/dore.script.js') }}"></script>
         <script src="{{ asset('/js/scripts.js') }}"></script>
         <script src="{{ asset('/js/app.js') }}"></script>
+        <script src="{{ asset('/node_modules/sweetalert2/dist/sweetalert2.all.js/sweetalert2.all.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.29.2/sweetalert2.all.js"></script>
+
     {% endblock %}
 </head>
 
@@ -279,12 +283,12 @@
                                             class="d-inline-block">Register</span>
                                 </a>
                             </li>
-                            <li>
+{#                            <li>#}
 {#                                <a href="{{ path("app_forgotPassword") }}">#}
-                                    <i class="simple-icon-user-unfollow"></i> <span class="d-inline-block">Forgot
-                                            Password</span>
-                                </a>
-                            </li>
+{#                                    <i class="simple-icon-user-unfollow"></i> <span class="d-inline-block">Forgot#}
+{#                                            Password</span>#}
+{#                                </a>#}
+{#                            </li>#}
                         </ul>
                     </div>
                 </li>
@@ -302,23 +306,22 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="">
-{#                                    {{ path("app_create") }}#}
+                                <a href="{{ path("app_product") }}">
                                     <i class="simple-icon-list"></i> <span class="d-inline-block">New Product
                                             </span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="Pages.Product.Images.html">
-                                    <i class="simple-icon-grid"></i> <span class="d-inline-block">Image
-                                            List</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="Pages.Product.Detail.html">
-                                    <i class="simple-icon-book-open"></i> <span class="d-inline-block">Detail</span>
-                                </a>
-                            </li>
+{#                            <li>#}
+{#                                <a href="Pages.Product.Images.html">#}
+{#                                    <i class="simple-icon-grid"></i> <span class="d-inline-block">Image#}
+{#                                            List</span>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="Pages.Product.Detail.html">#}
+{#                                    <i class="simple-icon-book-open"></i> <span class="d-inline-block">Detail</span>#}
+{#                                </a>#}
+{#                            </li>#}
                         </ul>
                     </div>
                 </li>

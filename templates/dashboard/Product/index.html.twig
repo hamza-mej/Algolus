@@ -145,7 +145,15 @@
                                         Edit
                                         </button>
 {#                                        <a href="{{ path('app_delete', {id: product.id}) }}">#}
-                                            <button type="button" class="deleteBtn badge badge-pill badge-secondary border-0 font-weight-bold" delete-id="{{product.id}}" >Delete</button>
+                                            <button type="button"   class="deleteBtn badge badge-pill badge-secondary border-0 font-weight-bold delete-article" data-id="{{product.id}}" >Delete</button>
+{#                                        <a href="#" onclick="myFunction(this)" data-url="{{ path('app_delete', {'id': product.id}) }}" class="btn btn-white" data-toggle="tooltip" data-toggle="tooltip" data-placement="top" title="Delete">#}
+{#                                            <i class="fa fa-trash">Delete</i>#}
+{#                                        </a>#}
+{#                                        </a>#}
+{#                                        <a href="{{ path('app_delete', {id: product.id}) }}"#}
+{#                                           onclick="return confirm('are u sure?')" class="btn badge badge-pill badge-secondary border-0 font-weight-bold"#}
+{#                                           data-toggle="tooltip" data-toggle="tooltip" data-placement="top" title="Delete">#}
+{#                                            <i class="fa fa-trash">Ok</i>#}
 {#                                        </a>#}
 {#                                        <button type="button" class="badge badge-pill badge-secondary border-0 font-weight-bold" href="{{ path('app_delete', {id: product.id}) }}">Delete</button>#}
                                     </div>
@@ -252,74 +260,81 @@
                     </div>
 
                     {#      MODAL OF DELETE      #}
-                    <div id="myModalDelete" class="modal fade" role="dialog">
-                        <div class="modal-dialog modal-lg">
+{#                    <div id="myModalDelete" class="modal fade" role="dialog">#}
+{#                        <div class="modal-dialog modal-lg">#}
 
-                            <!-- Modal content-->
-                            <div class="modal-content">
+{#                            <!-- Modal content-->#}
+{#                            <div class="modal-content">#}
 
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Delete Product</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
+{#                                <div class="modal-header">#}
+{#                                    <h5 class="modal-title">Delete Product</h5>#}
+{#                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                                        <span aria-hidden="true">&times;</span>#}
+{#                                    </button>#}
+{#                                </div>#}
 
-                                <div class="modal-body">
-                                    <div class="container">
-                                        <div class="row col-md-12">
-                                            <div class="my-form" >
-                                                <h1>Delete ?</h1>
-                                                <form action="" method="POST" id="formDelete">
-                                                    <div class="d-flex justify-content-end align-items-center mt-5">
-    {#                                                    <a href="{{ path('app_delete', {id: product.id}) }}">#}
-                                                            <button class="btn btn-primary btn-lg btn-shadow mr-2" type="submit" >Delete</button>
-    {#                                                    </a>#}
-                                                        <button type="reset"  class="btn btn-primary btn-lg btn-shadow" data-dismiss="modal">Cancel</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+{#                                <div class="modal-body">#}
+{#                                    <div class="container">#}
+{#                                        <div class="row col-md-12">#}
+{#                                            <div class="my-form" >#}
+{#                                                <h1>Delete ?</h1>#}
+{#                                                <form action="" method="POST" id="formDelete">#}
+{#                                                    <div class="d-flex justify-content-end align-items-center mt-5">#}
+{#    #}{#                                                    <a href="{{ path('app_delete', {id: product.id}) }}">#}
+{#                                                            <button class="btn btn-primary btn-lg btn-shadow mr-2" type="submit" >Delete</button>#}
+{#    #}{#                                                    </a>#}
+{#                                                        <button type="reset"  class="btn btn-primary btn-lg btn-shadow" data-dismiss="modal">Cancel</button>#}
+{#                                                    </div>#}
+{#                                                </form>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
 
-                            </div>
+{#                            </div>#}
 
-                        </div>
-                    </div>
-                    <nav class="mt-4 mb-3">
-                        <ul class="pagination justify-content-center mb-0">
-                            <li class="page-item ">
-                                <a class="page-link first" href="#">
-                                    <i class="simple-icon-control-start"></i>
-                                </a>
-                            </li>
-                            <li class="page-item ">
-                                <a class="page-link prev" href="#">
-                                    <i class="simple-icon-arrow-left"></i>
-                                </a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item ">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item ">
-                                <a class="page-link next" href="#" aria-label="Next">
-                                    <i class="simple-icon-arrow-right"></i>
-                                </a>
-                            </li>
-                            <li class="page-item ">
-                                <a class="page-link last" href="#">
-                                    <i class="simple-icon-control-end"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+{#                        </div>#}
+{#                    </div>#}
+
+                    {% do products.setPageRange(3) %}
+                    {{ knp_pagination_render(products, 'dashboard/Product/paginator.html.twig') }}
+
+{#                    <nav class="mt-4 mb-3">#}
+{#                        <ul class="pagination justify-content-center mb-0">#}
+{#                            <li class="page-item ">#}
+{#                                <a class="page-link first" href="#">#}
+{#                                    <i class="simple-icon-control-start"></i>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li class="page-item ">#}
+{#                                <a class="page-link prev" href="#">#}
+{#                                    <i class="simple-icon-arrow-left"></i>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li class="page-item active">#}
+{#                                <a class="page-link" href="#">1</a>#}
+{#                            </li>#}
+{#                            <li class="page-item ">#}
+{#                                <a class="page-link" href="#">2</a>#}
+{#                            </li>#}
+{#                            <li class="page-item">#}
+{#                                <a class="page-link" href="#">3</a>#}
+{#                            </li>#}
+{#                            <li class="page-item ">#}
+{#                                <a class="page-link next" href="#" aria-label="Next">#}
+{#                                    <i class="simple-icon-arrow-right"></i>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li class="page-item ">#}
+{#                                <a class="page-link last" href="#">#}
+{#                                    <i class="simple-icon-control-end"></i>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </nav>#}
+
+
+
                 </div>
             </div>
         </div>
@@ -349,5 +364,6 @@
             </div>
         </div>
     </footer>
+
 
 {% endblock %}

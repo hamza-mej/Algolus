@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Form\ProductFormType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,9 +44,16 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product', name: 'app_product')]
-    public function create(ProductRepository $productRepository, Request $request,EntityManagerInterface $em): Response
+    public function create(ProductRepository $productRepository, Request $request,
+                           EntityManagerInterface $em,PaginatorInterface $paginator): Response
     {
-        $products = $productRepository->findAll();
+        $data = $productRepository->findAll();
+        $products = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            3
+        );
+
         $product = new Product;
         $form = $this->createForm(ProductFormType::class, $product);
         $form->handleRequest($request);
@@ -93,6 +101,7 @@ class ProductController extends AbstractController
     #[Route('/delete{id}', name: 'app_delete', methods: ['GET','POST'])]
     public function delete(EntityManagerInterface $em, Product $product): Response
     {
+        dd('dd');
         $em->remove($product);
         $em->flush();
 

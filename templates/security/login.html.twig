@@ -47,7 +47,7 @@
 </head>
 
 
-{% block body %}
+{#{% block body %}#}
     <body class="background show-spinner no-footer">
     <div class="fixed-background"></div>
     <main>
@@ -62,7 +62,7 @@
                             <p class="white mb-0">
                                 Please use your credentials to login.
                                 <br>If you are not a member, please
-                                <a href="#" class="white">register</a>.
+                                <a href="{{ path('app_register')}}" class="white">register</a>.
                             </p>
                         </div>
                         <div class="form-side">
@@ -93,7 +93,7 @@
                                 </label>
 
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <a href="#">Forget password?</a>
+                                    <a href="{{ path('app_forgot_password_request') }}">Forget password?</a>
                                     <a href="{{ path('app_register') }}">Sign Up?</a>
                                     <button class="btn btn-primary btn-lg btn-shadow" type="submit">LOGIN</button>
                                 </div>
@@ -113,4 +113,5 @@
     <script src="js/dore.script.js"></script>
     <script src="js/scripts.js"></script>
     </body>
-{% endblock %}
+{#{% endblock %}#}
+</html>
