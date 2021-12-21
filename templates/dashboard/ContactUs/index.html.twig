@@ -1,0 +1,106 @@
+{% extends 'dashboard/baseDashboard.html.twig' %}
+
+
+{% block title %}Hello ContactUs!{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>ContactUs</h1>
+                    <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+                        <ol class="breadcrumb pt-0">
+                            <li class="breadcrumb-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#">Library</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Data</li>
+                        </ol>
+                    </nav>
+                    <div class="separator mb-5"></div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <table class="data-table data-table-scrollable responsive "
+                                   data-order="[[ 1, &quot;desc&quot; ]]">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Subject </th>
+                                    <th>Message</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for contact in contact %}
+                                    <tr>
+                                        <td>
+                                            <p class="text-muted">{{ contact.contactName }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="list-item-heading">{{ contact.contactEmail }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="list-item-heading">{{ contact.contactSubject }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="list-item-heading">{{ contact.contactMessage }}</p>
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('dashboard_delete_contactUs', {id: contact.id}) }}"
+                                               onclick="return confirm('are u sure?')"
+                                               class="btn badge badge-pill badge-secondary border-0 font-weight-bold"
+                                               data-toggle="tooltip" data-toggle="tooltip" data-placement="top"
+                                               title="Delete">
+                                                <i class="fa fa-trash">&nbsp;&nbsp; Delete</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <div class="footer-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <p class="mb-0 text-muted">ColoredStrategies 2019</p>
+                    </div>
+                    <div class="col-sm-6 d-none d-sm-block">
+                        <ul class="breadcrumb pt-0 pr-0 float-right">
+                            <li class="breadcrumb-item mb-0">
+                                <a href="#" class="btn-link">Review</a>
+                            </li>
+                            <li class="breadcrumb-item mb-0">
+                                <a href="#" class="btn-link">Purchase</a>
+                            </li>
+                            <li class="breadcrumb-item mb-0">
+                                <a href="#" class="btn-link">Docs</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+{% endblock %}

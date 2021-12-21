@@ -1,0 +1,92 @@
+{% extends 'Front/base.html.twig' %}
+
+{% block title %}Hello SHOP!{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="breadcrumb-area bg-img" style="background-image:url(assets/images/bg/breadcrumb.jpg);">
+            <div class="container">
+                <div class="breadcrumb-content text-center">
+                    <h2>contact page</h2>
+                    <ul>
+                        <li>
+                            <a href="{{ path('app_algolus') }}">Home</a>
+                        </li>
+                        <li class="active">contact us </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="contact-area pt-85 pb-90">
+            <div class="container">
+                <div class="contact-info-wrap mb-50">
+                    <h3>contact info</h3>
+                    <div class="row">
+                        {% for pInfo in PersonalInfo %}
+                        <div class="col-lg-4 col-md-4">
+                            <div class="single-contact-info text-center mb-30">
+                                <i class="ti-location-pin"></i>
+                                <h4>our address</h4>
+                                <p>{{ pInfo.address }}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="single-contact-info extra-contact-info text-center mb-30">
+                                <ul>
+                                    <li><i class="ti-mobile"></i>{{ pInfo.phone }}</li>
+                                    <li><i class="ti-email"></i> <a href="#">{{ pInfo.email }}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="single-contact-info text-center mb-30">
+                                <i class=" ti-alarm-clock"></i>
+                                <h4>openning hour</h4>
+                                <p>{{ pInfo.content }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="get-in-touch-wrap">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-from contact-shadow">
+                        {{ form_start(ContactForm) }}
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    {{ form_row(ContactForm.contactName,
+                                        {'label':false}
+                                    ) }}
+                                </div>
+                                <div class="col-lg-6">
+                                    {{ form_row(ContactForm.contactEmail,
+                                        {'label':false}
+                                    ) }}
+                                </div>
+                                <div class="col-lg-12">
+                                    {{ form_row(ContactForm.contactSubject,
+                                        {'label':false}
+                                    ) }}
+                                </div>
+                                <div class="col-lg-12">
+                                    {{ form_row(ContactForm.contactMessage,
+                                        {'label':false}
+                                    ) }}
+                                </div>
+                                <div class="col-lg-12">
+                                    <button class="submit" type="submit">Send Message</button>
+                                </div>
+                            </div>
+                        {{ form_end(ContactForm) }}
+
+
+                        <p class="form-messege"></p>
+                    </div>
+                </div>
+                <div class="contact-map pt-90">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

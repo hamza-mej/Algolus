@@ -1,0 +1,228 @@
+{% extends 'Front/base.html.twig' %}
+
+{% block title %}Hello SHOP!{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="breadcrumb-area bg-img" style="background-image:url(assets/images/bg/breadcrumb.jpg);">
+            <div class="container">
+                <div class="breadcrumb-content text-center">
+                    <h2>checkout page</h2>
+                    <ul>
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="active">checkout </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="checkout-main-area pt-90 pb-90">
+            <div class="container">
+
+                <div class="checkout-wrap pt-30">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="billing-info-wrap mr-50">
+                                <div class="your-order-area" >
+                                <h3>Billing Details</h3>
+                                    <div class="row">
+                                            <div class="col-lg-6 col-md-6" id="first">
+
+                                                    {{ form_start(EditRegistrationForm, {
+                                                        'attr': {'id': 'myFormCheckout'},
+                                                    }) }}
+                                                <div class="billing-info mb-20">
+                                                    <label>
+                                                        <span>Prénom <abbr class="required" title="required"  style="color: red">*</abbr></span>
+                                                        {{ form_row(EditRegistrationForm.firstName, {
+                                                            'attr': {'placeholder': 'prénom ', 'class': 'mt-1',},
+                                                        }) }}
+                                                    </label>
+                                                </div>
+                                                <div class="billing-info mb-20">
+                                                    <label>
+                                                        <span>Nom <abbr class="required" title="required"  style="color: red">*</abbr></span>
+                                                        {{ form_row(EditRegistrationForm.lastName, {
+                                                            'attr': {'placeholder': 'nom' , 'class': 'mt-1',},
+                                                        }) }}
+                                                    </label>
+                                                </div>
+                                                <div class="billing-info mb-20">
+                                                    <label >
+                                                        <span>Pays <abbr class="required" title="required"  style="color: red">*</abbr></span>
+                                                        {{ form_row(EditRegistrationForm.country, {
+                                                            'attr': {'placeholder': 'pays', 'class': 'mt-1', 'style': 'width: 520px'},
+                                                        }) }}
+                                                    </label>
+                                                </div>
+                                                <div class="billing-info mb-20">
+                                                    <label>
+                                                        <span>Adresse de la rue <abbr class="required" title="required"  style="color: red">*</abbr></span>
+                                                        {{ form_row(EditRegistrationForm.address, {
+                                                            'attr': {'placeholder': 'numéro de maison et nom de rue','class': 'mt-1','style': 'width: 520px'},
+                                                        }) }}
+                                                    </label>
+                                                </div>
+                                                <div class="billing-info mb-20">
+                                                    <label>
+                                                        <span>Ville <abbr class="required" title="required"  style="color: red">*</abbr></span>
+                                                        {{ form_row(EditRegistrationForm.city, {
+                                                            'attr': {'placeholder': 'Ville', 'class': 'mt-1', 'style': 'width: 520px'},
+                                                        }) }}
+                                                    </label>
+                                                </div>
+                                                <div class="billing-info mb-20">
+                                                    <label>
+                                                        <span>Etat / Région <abbr class="required" title="required"  style="color: red">*</abbr></span>
+                                                        {{ form_row(EditRegistrationForm.state, {
+                                                            'attr': {'placeholder': 'région', 'class': 'mt-1', 'style': 'width: 520px'},
+                                                        }) }}
+                                                    </label>
+                                                </div>
+                                                <div class="billing-info mb-20">
+                                                    <label>
+                                                        <span>Code postal / ZIP <abbr class="required" title="required"  style="color: red">*</abbr></span>
+                                                        {{ form_row(EditRegistrationForm.postCode, {
+                                                            'attr': {'placeholder': 'code postal', 'class': 'mt-1', 'style': 'width: 520px'},
+                                                        }) }}
+                                                    </label>
+                                                </div>
+                                                <div class="billing-info mb-20">
+                                                    <label>
+                                                        <span>Téléphone <abbr class="required" title="required"  style="color: red">*</abbr></span>
+                                                        {{ form_row(EditRegistrationForm.phone, {
+                                                            'attr': {'placeholder': 'téléphone', 'class': 'mt-1', 'style': 'width: 520px'},
+                                                        }) }}
+                                                    </label>
+                                                </div>
+                                                <div class="billing-info mb-20">
+                                                    <label>
+                                                        <span>Adresse e-mail <abbr class="required mb-1" title="required"  style="color: red">*</abbr></span>
+                                                        {{ form_row(EditRegistrationForm.email, {
+                                                            'attr': {'placeholder': 'email', 'class': 'mt-1', 'style': 'width: 520px'},
+                                                        }) }}
+                                                    </label>
+                                                </div>
+
+                                                <div class="Place-order mt-40">
+                                                    <button  type="submit" style="border: none; background-color: #ff5151; padding: 20px 217px; color: white; font-size: large; font-weight: bold; letter-spacing: 2px;"
+                                                            onmouseover="this.style.backgroundColor='#373737'" onmouseout="this.style.backgroundColor='#ff5151'"  >Register</button>
+                                                </div>
+
+{#                                                    <div class="button-box">#}
+{#                                                        #}
+{#                                                    </div>#}
+                                                    {{ form_end(EditRegistrationForm) }}
+
+
+                                            </div>
+                                    </div>
+                                    <div id="form_success">
+                                        <h5 style="color: #ff5151; font-size: 17px" ><i class="fa fa-check-circle" style="color: #ff5151"></i> You can proceed to authorise the payment <i class="far fa-hand-point-right " style="color: #ff5151"></i></h5>
+                                    </div>
+                                </div>
+{#                                <div class="additional-info-wrap">#}
+{#                                    <label>Order notes</label>#}
+{#                                    <textarea placeholder="Notes about your order, e.g. special notes for delivery. " name="message"></textarea>#}
+{#                                </div>#}
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="your-order-area" >
+                                <h3>Your order</h3>
+                                {% if items | length > 0%}
+                                <div class="your-order-wrap gray-bg-4">
+                                         <div class="your-order-info-wrap">
+                                        <div class="your-order-info">
+                                            <ul>
+                                                <li>Product <span>Total</span></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="your-order-middle">
+                                            <ul>
+                                                {% for item in items %}
+                                                <li>{{ item.product.productName }} X {{ item.quantity }}<span>${{ item.product.productPrice }}<a class="ml-1" href="{{ path('app_checkout_remove', {id: item.product.id}) }}"><i class="la la-trash"></i></a> </span></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+
+{#                                        <div class="your-order-info order-subtotal">#}
+{#                                            <ul>#}
+{#                                                <li>Subtotal <span>${{ item.product.productPrice * item.quantity }} </span></li>#}
+{#                                            </ul>#}
+{#                                        </div>#}
+{#                                        <div class="your-order-info order-shipping">#}
+{#                                            <ul>#}
+{#                                                <li>Shipping <p>Enter your full address </p>#}
+{#                                                </li>#}
+{#                                            </ul>#}
+{#                                        </div>#}
+                                        <div class="your-order-info order-total">
+                                            <ul>
+                                                <li>Total <span>${{ total }}</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="payment-method">
+{#                                        <div class="pay-top sin-payment">#}
+{#                                            <input id="payment_method_1" class="input-radio" type="radio" value="cheque" checked="checked" name="payment_method">#}
+{#                                            <label for="payment_method_1"> Direct Bank Transfer </label>#}
+{#                                            <div class="payment-box payment_method_bacs">#}
+{#                                                <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <div class="pay-top sin-payment">#}
+{#                                            <input id="payment-method-2" class="input-radio" type="radio" value="cheque" name="payment_method">#}
+{#                                            <label for="payment-method-2">Check payments</label>#}
+{#                                            <div class="payment-box payment_method_bacs">#}
+{#                                                <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <div class="pay-top sin-payment">#}
+{#                                            <input id="payment-method-3" class="input-radio" type="radio" value="cheque" name="payment_method">#}
+{#                                            <label for="payment-method-3">Cash on delivery </label>#}
+{#                                            <div class="payment-box payment_method_bacs">#}
+{#                                                <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+                                        <div class="pay-top sin-payment sin-payment-3">
+                                            <input id="payment-method-4" class="input-radio" type="radio" checked value="cheque" name="payment_method">
+                                            <label for="payment-method-4">PayPal <img alt="" src="assets/images/icon-img/payment.png"><a href="#">What is PayPal?</a></label>
+                                            <div class="payment-box payment_method_bacs">
+                                                <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="Place-order mt-40">
+                                    <form action="/checkoutPayment" method="POST">
+                                        <a href="{{ path('checkoutPayment') }}" type="submit" class="PlaceOrder btn-disabled" disabled="disabled" id="second">Place Order</a>
+                                    </form>
+                                </div>
+                                {% else %}
+                                    <div class="col-xl-12 col-lg-12 col-sm-8">
+                                        <div class="grand-totall empty-cart-page">
+                                            <div class="mb-20">
+                                                <p>Your cart is currently empty!</p>
+                                            </div>
+                                            <a href="{{ path('app_product_shop') }}">Continue browsing</a>
+                                        </div>
+                                    </div>
+                                    <div class="Place-order mt-40">
+                                        <form action="/checkoutPayment" method="POST">
+                                            <a href="{{ path('checkoutPayment') }}" type="submit" class="PlaceOrder" disabled="disabled">Place Order</a>
+                                        </form>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

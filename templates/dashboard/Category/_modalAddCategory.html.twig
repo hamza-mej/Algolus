@@ -1,0 +1,55 @@
+<div id="myModalAddCategory" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-bold ml-3 h3">Add Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ path('app_create_category') }}" method="POST"
+                  id="formAddCategory" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <div class="form-group">
+                                    <input type="file" id="image" class="form-control chp" placeholder="Image"
+                                           data-toggle="tooltip" title="(Facultatif)"
+                                           name="categoryImage">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="nomCategory" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">
+                                        Category Name
+                                    </label>
+                                    <input type="text" id="nomCategory" class="form-control chp" placeholder="Category Name" name="nomCategory" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-light btn-shadow font-weight-bold" data-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button class="btn btn-primary btn-shadow font-weight-bold" type="submit">
+                        Add
+                    </button>
+                </div>
+            </form>
+        </div>
+
+
+
+        </div>
+
+    </div>
+</div>

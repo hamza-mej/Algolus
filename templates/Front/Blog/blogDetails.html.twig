@@ -1,0 +1,206 @@
+{% extends 'Front/base.html.twig' %}
+
+{% block title %}BLOG PAGE!{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="breadcrumb-area bg-img" style="background-image:url(assets/images/bg/breadcrumb.jpg);">
+            <div class="container">
+                <div class="breadcrumb-content text-center">
+                    <h2>Blog Details Page</h2>
+                    <ul>
+                        <li>
+                            <a href="{{ path('app_algolus') }}">Home</a>
+                        </li>
+                        <li class="active">blog</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-details-area pt-90 pb-90">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="blog-details-wrap">
+                            <div class="blog-details-img mb-40">
+                                <img src="assets/images/blog/blog-details.jpg" alt="blog">
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-2 col-lg-2">
+                                    <div class="blog-details-author">
+                                        <h4><span>by</span>
+                                            Robert Hutton,<br>
+                                            Svenja O'Donnell<br>
+                                            and Thomas Penny
+                                        </h4>
+                                        <div class="author-social">
+                                            <ul>
+                                                <li><a class="facebook" href="#"><i class=" ti-facebook"></i></a></li>
+                                                <li><a class="twitter" href="#"><i class=" ti-twitter-alt"></i></a></li>
+                                                <li><a class="google" href="#"><i class=" ti-google "></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-10">
+                                    <div class="blog-details-content">
+                                        <p class="mb-35">Lorem Ipsum is simply du of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy ever since the 1500s, when an unknown printer took a galley of type</p>
+                                        <p>It is a long established fact that a reader will be distracted by the readable con a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-l normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
+                                        <blockquote>
+                                            <img src="assets/images/icon-img/blockquote.png" alt="blog">
+                                            <h3>Lorem Ipsum is simply dummy text of the printing and typesetting.</h3>
+                                        </blockquote>
+                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="blog-details-img pt-120 pb-50">
+                                <img src="assets/images/blog/blog-details-2.jpg" alt="blog">
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-12 pl-215 pr-445">
+                                    <div class="blog-details-content">
+                                        <p class="mb-80">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
+                                        <div class="place">
+                                            <h3>Buckingham Palace</h3>
+                                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters Many desktop publishing packages and web.</p>
+                                        </div>
+                                    </div>
+                                    <div class="blog-tag">
+                                        <ul>
+                                            <li><a href="#">markets</a></li>
+                                            <li><a href="#">business</a></li>
+                                            <li><a href="#">sport</a></li>
+                                            <li><a href="#">special reports</a></li>
+                                            <li><a href="#">culture</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="blog-share">
+                                        <span>share:</span>
+                                        <ul>
+                                            <li><a class="facebook" href="#"><i class=" ti-facebook"></i> 125</a></li>
+                                            <li><a class="twitter" href="#"><i class=" ti-twitter-alt"></i> 502</a></li>
+                                            <li><a class="google" href="#"><i class=" ti-google "></i> 25</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="blog-comment-area">
+                                        <h4>Comments</h4>
+                                        <div class="blog-comment-wrap">
+                                            <div class="single-blog-comment">
+                                                <div class="blog-comment-img">
+                                                    <img src="assets/images/blog/comment-1.png" alt="comment-img">
+                                                </div>
+                                                <div class="blog-comment-content">
+                                                    <div class="blog-comment-top">
+                                                        <h5>john doe</h5>
+                                                        <span><img src="assets/images/icon-img/calender.png" alt="calender"> 2 hours ago</span>
+                                                    </div>
+                                                    <p>While Cameron has had a great night, I suspect his problems in some way have only just begun.</p>
+                                                </div>
+                                            </div>
+                                            <div class="single-blog-comment">
+                                                <div class="blog-comment-img">
+                                                    <img src="assets/images/blog/comment-2.png" alt="comment-img">
+                                                </div>
+                                                <div class="blog-comment-content">
+                                                    <div class="blog-comment-top">
+                                                        <h5>john doe</h5>
+                                                        <span><img src="assets/images/icon-img/calender.png" alt="calender"> 2 hours ago</span>
+                                                    </div>
+                                                    <p>While Cameron has had a great night, I suspect his problems in some way have only just begun.</p>
+                                                </div>
+                                            </div>
+                                            <div class="single-blog-comment">
+                                                <div class="blog-comment-img">
+                                                    <img src="assets/images/blog/comment-3.png" alt="comment-img">
+                                                </div>
+                                                <div class="blog-comment-reply">
+                                                    <textarea placeholder="Your comment..."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer-area section-padding-2 bg-bluegray pt-80">
+            <div class="container-fluid">
+                <div class="footer-top pb-40">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-8 col-12 col-sm-12">
+                            <div class="footer-widget mb-30">
+                                <a href="#"><img src="assets/images/logo/logo-1.png" alt="logo"></a>
+                                <div class="footer-about">
+                                    <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-6 col-sm-6">
+                            <div class="footer-widget mb-30 ml-55">
+                                <div class="footer-title-3">
+                                    <h3>Company</h3>
+                                </div>
+                                <div class="footer-list-3">
+                                    <ul>
+                                        <li><a href="about-us.html">About US</a></li>
+                                        <li><a href="blog.html">Blogs</a></li>
+                                        <li><a href="#">Careers</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 col-sm-6">
+                            <div class="footer-widget mb-30 footer-ngtv-mrg1">
+                                <div class="footer-title-3">
+                                    <h3>Product</h3>
+                                </div>
+                                <div class="footer-list-3">
+                                    <ul>
+                                        <li><a href="#">Pricing</a></li>
+                                        <li><a href="#">Features</a></li>
+                                        <li><a href="#">Customers</a></li>
+                                        <li><a href="#">Demos</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 col-sm-6">
+                            <div class="footer-widget mb-30 ml-35">
+                                <div class="footer-title-3">
+                                    <h3>Helps</h3>
+                                </div>
+                                <div class="footer-list-3">
+                                    <ul>
+                                        <li><a href="#">Introduction</a></li>
+                                        <li><a href="#">Feedback</a></li>
+                                        <li><a href="#">Referrals</a></li>
+                                        <li><a href="#">Network Status</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 col-sm-6">
+                            <div class="footer-widget mb-30 ml-135">
+                                <div class="footer-title-3">
+                                    <h3>Social Netowrk</h3>
+                                </div>
+                                <div class="footer-list-3">
+                                    <ul>
+                                        <li><a href="#">Facebook</a></li>
+                                        <li><a href="#">Twitter</a></li>
+                                        <li><a href="#">Linkedin</a></li>
+                                        <li><a href="#">Google +</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% for product in products %}
+    <div class="shop-list-wrap mb-30">
+        <div class="row ">
+            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-6">
+                <div class="product-list-img">
+                    <a href="product-details.html">
+                        <img src="{{ asset('uploads/product/') ~ product.productImage }}" alt="{{ product.productName }}">
+                    </a>
+                    <div class="product-list-quickview">
+                        <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class="la la-plus"></i></a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xl-8 col-lg-7 col-md-6 col-sm-6">
+                <div class="shop-list-content">
+
+                    <h4><a href="product-details.html">{{ product.productName }}</a></h4>
+                    <div class="pro-list-price mb-2">
+                        <span>${{ product.productPrice | number_format(0, ',', ' ') }}</span>
+                        <span class="old-price">$50.00</span>
+                    </div>
+{#                    {{ blog.title|striptags|length > 17 ? blog.title|striptags|slice(0, 17) ~ '...' : blog.title|striptags }}#}
+{#                    <span>{{ product.productDescription  }}</span>#}
+                    <span>{{ product.productDescription|striptags|length < 200 ? 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable.' ~ '...' : product.productDescription|striptags }}</span>
+                    <div class="product-list-action mt-4">
+                        <a title="Wishlist" href="#"><i class="la la-heart-o"></i></a>
+                        <a title="Compare" href="#"><i class="la la-retweet"></i></a>
+                        <a title="Add To Cart" href="#"><i class="la la-shopping-cart"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -20,6 +20,12 @@
   },
   "homepage": "https://github.com/hamza-mej/Algolus#readme",
   "dependencies": {
+    "flip-toolkit": "^7.0.13",
     "sweetalert2": "^11.1.9"
+  },
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.0.0",
+    "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/Resources/assets",
+    "nouislider": "^15.5.0"
   }
 }

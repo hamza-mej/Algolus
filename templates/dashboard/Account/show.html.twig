@@ -1,0 +1,128 @@
+{% extends 'dashboard/baseDashboard.html.twig' %}
+
+
+{% block title %}Profile !{% endblock %}
+
+{% block body %}
+
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="mb-2">
+                        <h1 style="text-transform: capitalize;">
+                            {% if is_granted('ROLE_USER') %}
+                            {{ app.user.getFullName }}
+                            {% else %}
+                            User Name
+                            {% endif %}
+                        </h1>
+                        <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+                            <ol class="breadcrumb pt-0">
+                                <li class="breadcrumb-item">
+                                    <a href="#">Home</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">Library</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Data</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <ul class="nav nav-tabs separator-tabs ml-0 mb-5" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="first-tab" data-toggle="tab" href="#first" role="tab"
+                               aria-controls="first" aria-selected="true">PROFILE</a>
+                        </li>
+                    </ul>
+                    <div class="row">
+                        <div class="col-12 col-lg-5 col-xl-4 col-left">
+                             <div class="card mb-4">
+                                <div class="position-absolute card-top-buttons">
+                                    <button class="btn btn-outline-white icon-button ">
+                                        <i class="simple-icon-pencil"></i>
+                                    </button>
+                                </div>
+                                <img src="img/profiles/img.png" alt="Detail Picture" class="card-img-top mx-auto mt-3" style="height: 200px; width: 200px;"/>
+
+                                <div class="card-body">
+                                    <p class="text-muted text-small mb-2">About</p>
+                                    <p class="mb-3">
+                                        I’m a web developer. I spend my whole day, practically every day,
+                                        experimenting with HTML, CSS, and JavaScript; dabbling with Python and
+                                        Ruby; and inhaling a wide variety of potentially useless information
+                                        through a few hundred RSS feeds. I build websites that delight and
+                                        inform. I do it well.
+                                    </p>
+
+                                    <p class="text-muted text-small mb-2">Location</p>
+                                    <p class="mb-3">Nairobi, Kenya</p>
+
+                                    <p class="text-muted text-small mb-2">Responsibilities</p>
+                                    <p class="mb-3">
+                                        <a href="#">
+                                                                <span
+                                                                        class="badge badge-pill badge-outline-theme-2 mb-1">FRONTEND</span>
+                                        </a>
+                                        <a href="#">
+                                                                <span
+                                                                        class="badge badge-pill badge-outline-theme-2 mb-1">JAVASCRIPT</span>
+                                        </a>
+                                        <a href="#">
+                                                                <span
+                                                                        class="badge badge-pill badge-outline-theme-2 mb-1">SECURITY</span>
+                                        </a>
+                                        <a href="#">
+                                                                <span
+                                                                        class="badge badge-pill badge-outline-theme-2 mb-1">DESIGN</span>
+                                        </a>
+                                    </p>
+                                    <p class="text-muted text-small mb-2">Contact</p>
+                                    <div class="social-icons">
+                                        <ul class="list-unstyled list-inline">
+                                            <li class="list-inline-item">
+                                                <a href="#"><i class="simple-icon-social-facebook"></i></a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="#"><i class="simple-icon-social-twitter"></i></a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="#"><i class="simple-icon-social-instagram"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                    </div>
+                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="page-footer">
+        <div class="footer-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <p class="mb-0 text-muted">ColoredStrategies 2019</p>
+                    </div>
+                    <div class="col-sm-6 d-none d-sm-block">
+                        <ul class="breadcrumb pt-0 pr-0 float-right">
+                            <li class="breadcrumb-item mb-0">
+                                <a href="#" class="btn-link">Review</a>
+                            </li>
+                            <li class="breadcrumb-item mb-0">
+                                <a href="#" class="btn-link">Purchase</a>
+                            </li>
+                            <li class="breadcrumb-item mb-0">
+                                <a href="#" class="btn-link">Docs</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+{% endblock %}

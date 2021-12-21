@@ -3,12 +3,22 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+
 
 /**
- * @ORM\HasLifecycleCallbacks()
+ * @Vich\Uploadable
+ * @ORM\Table(name="product", indexes={@ORM\Index(columns={"product_name", "product_description"}, flags={"fulltext"})})
  */
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[Entity, HasLifecycleCallbacks]
+//#[Table]
+//#[UniqueConstraint(name: "product", columns=["product_name", "product_description"])]
 class Product
 {
     #[ORM\Id]
@@ -32,21 +42,40 @@ class Product
     private $productDescription;
 
     /**
-     * @ORM\Column(name="created_at", type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="product_image", fileNameProperty="productImage")
+     *
+     * @var File|null
      */
-//    #[ORM\Column(type: 'datetime_immutable', options: ['default' => ['CURRENT_TIMESTAMP']] )]
+//    #[Vich\UploadableField(mapping: 'product_image', fileNameProperty: 'productImage')]
+    private $imageFile;
+
+    #[ORM\Column(type: 'datetime_immutable', options: [ "default" => "CURRENT_TIMESTAMP" ])]
     private $createdAt;
 
-    /**
-     * @ORM\Column(name="created_at", type="datetime", options={"default": "CURRENT_TIMESTAMP"})
-     */
-//    #[ORM\Column(type: 'datetime_immutable', options: ['default' => ['CURRENT_TIMESTAMP']] )]
+    #[ORM\Column(type: 'datetime_immutable', options: [ "default" => "CURRENT_TIMESTAMP" ])]
     private $updatedAt;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'Product')]
+    #[Assert\NotBlanck]
     private $category;
 
+    #[ORM\Column(type: 'boolean', options: [ "default" => 0 ])]
+    private $onSale;
 
+
+    #[ORM\ManyToMany(targetEntity: Color::class, inversedBy: 'products')]
+    private $color;
+
+    #[ORM\ManyToMany(targetEntity: Size::class, inversedBy: 'products')]
+    private $size;
+
+    public function __construct()
+    {
+        $this->color = new ArrayCollection();
+        $this->size = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -58,7 +87,7 @@ class Product
         return $this->productName;
     }
 
-    public function setProductName(string $productName): self
+    public function setProductName(?string $productName): self
     {
         $this->productName = $productName;
 
@@ -70,7 +99,7 @@ class Product
         return $this->productPrice;
     }
 
-    public function setProductPrice(float $productPrice): self
+    public function setProductPrice(?float $productPrice): self
     {
         $this->productPrice = $productPrice;
 
@@ -113,6 +142,25 @@ class Product
         return $this;
     }
 
+    /**
+     * @param File|UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null)
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->setUpdatedAt(new \DateTimeImmutable());
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -137,10 +185,8 @@ class Product
         return $this;
     }
 
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
     public function updateTimestamps()
     {
         if ($this->getCreatedAt()===null)
@@ -161,5 +207,68 @@ class Product
 
         return $this;
     }
+
+    public function getOnSale(): ?bool
+    {
+        return $this->onSale;
+    }
+
+    public function setOnSale(?bool $onSale): self
+    {
+        $this->onSale = $onSale;
+
+        return $this;
+    }
+
+
+
+    /**
+     * @return Collection|Color[]
+     */
+    public function getColor(): Collection
+    {
+        return $this->color;
+    }
+
+    public function addColor(Color $color): self
+    {
+        if (!$this->color->contains($color)) {
+            $this->color[] = $color;
+        }
+
+        return $this;
+    }
+
+    public function removeColor(Color $color): self
+    {
+        $this->color->removeElement($color);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Size[]
+     */
+    public function getSize(): Collection
+    {
+        return $this->size;
+    }
+
+    public function addSize(Size $size): self
+    {
+        if (!$this->size->contains($size)) {
+            $this->size[] = $size;
+        }
+
+        return $this;
+    }
+
+    public function removeSize(Size $size): self
+    {
+        $this->size->removeElement($size);
+
+        return $this;
+    }
+
 
 }

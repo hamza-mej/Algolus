@@ -1,0 +1,90 @@
+{% extends 'Front/base.html.twig' %}
+
+{% block title %}BLOG PAGE!{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="breadcrumb-area bg-img" style="background-image:url(assets/images/bg/breadcrumb.jpg);">
+            <div class="container">
+                <div class="breadcrumb-content text-center">
+                    <h2>Blog page</h2>
+                    <ul>
+                        <li>
+                            <a href="{{ path('app_algolus') }}">Home</a>
+                        </li>
+                        <li class="active">blog</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="shopify-section-blog-template" class="shopify-section"><div class="blog-area pt-90 pb-90">
+                <div class="container js-filter">
+                    <div class="row flex-row-reverse"><div class="col-lg-9">
+                            <div class="row js-filter-content">
+                                {% include 'Front/Blog/_blog.html.twig' %}
+
+                            </div>
+                            <div class="js-filter-pagination">
+                                {% include 'Front/Blog/_pagination.html.twig' %}
+                            </div>
+
+
+                        </div><div class="col-lg-3">
+                            <div class="sidebar-wrapper">
+                                {{ form_start(formFilter, {attr: {class: 'js-filter-form'}}) }}
+                                <div class="sidebar-widget"><h4 class="sidebar-title">Search</h4><div class="sidebar-search mb-40 mt-20">
+{#                                        <form action="/search" method="get" role="search" class="sidebar-search-form">#}
+{#                                            <input type="hidden" name="type" value="article">#}
+{#                                            <input type="search" name="q" value="" placeholder="Search our store" aria-label="Search our store">#}
+{#                                            <button type="submit">#}
+{#                                                <i class="la la-search"></i>#}
+{#                                            </button>#}
+{#                                        </form>#}
+                                        {{ form_row(formFilter.q) }}
+                                    </div>
+                                </div>
+                                {{ form_end(formFilter) }}
+
+
+                                <div class="sidebar-widget pt-40 mt-40 shop-sidebar-border">
+
+                                    <h4 class="sidebar-title">Recent Post</h4>
+
+                                    <div class="sidebar-project-wrap mt-30">
+
+                                        {% for blog in blogs | slice(0, 3) %}
+                                        <div class="single-sidebar-blog">
+                                            <div class="sidebar-blog-img">
+                                                <a href="{{ path('app_blog_details', {id: blog.id})  }}"><img src="{{ asset('uploads/blog/') ~ blog.Image }}" alt="{{ blog.title }}"></a>
+                                            </div>
+                                            <div class="sidebar-blog-content">
+                                                <h4><a href="/blogs/news/there-are-many-variations-of-passages-of-lorem-2" style="text-transform: capitalize;">{{ blog.title|striptags|length > 17 ? blog.title|striptags|slice(0, 17) ~ '...' : blog.title|striptags }}</a></h4>
+
+{#                                                <span>July 31, 2019</span>#}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+                            </div>
+                        </div></div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </main>
+{% endblock %}

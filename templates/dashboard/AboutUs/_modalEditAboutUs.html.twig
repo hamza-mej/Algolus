@@ -1,0 +1,73 @@
+{% for aboutUs in aboutUs %}
+    <div id="modal-edit-aboutUs-{{ aboutUs.id }}" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold ml-3 h3">Edit AboutUs</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ path('dashboard_edit_about_us',{ 'id' : aboutUs.id }) }}" method="POST"
+                      id="formEditAboutUs" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <div class="form-group">
+                                    {# {{ product.productImage }} #}
+                                    <img src="{{ asset('uploads/aboutUs/') ~ aboutUs.image }}" alt="{{ aboutUs.image }}"
+                                         style="margin-left: 100px;" class="list-thumbnail responsive card-img-center img-thumbnail mb-4">
+                                    <input type="file" id="image" class="form-control chp mb-1 h6 font-weight-bold text-muted" placeholder="Image"
+                                           data-toggle="tooltip" title="(Facultatif)"
+                                           name="AboutUsImage">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="AboutUsTitle" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">
+                                        AboutUs Title
+                                    </label>
+                                    <input type="text" id="AboutUsTitle" class="form-control chp" placeholder="Title"
+                                           value="{{ aboutUs.title }}"
+                                           name="AboutUsTitle" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="AboutUsDescription" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">Description</label>
+                                    <textarea id="AboutUsDescription" class="form-control" placeholder="Description" name="AboutUsDescription" title="(Facultatif)" rows="4"
+                                              >{{ aboutUs.description }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="AboutUsContent" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">Content</label>
+                                    <textarea id="AboutUsContent" class="form-control chp" placeholder="Content"
+                                           name="AboutUsContent" rows="4" required>{{ aboutUs.content }}</textarea>
+                                </div>
+                            </div>
+
+
+
+                            <div class="msgerreur text-danger"></div>
+
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-light btn-shadow font-weight-bold" data-dismiss="modal">
+                            Cancel
+                        </button>
+                        <button class="btn btn-primary btn-shadow font-weight-bold" type="submit">
+                            Edit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,73 @@
+{% if pageCount > 1 %}
+    <div class="pagination-style text-center">
+        {% set classAlign = (align is not defined) ? '' : align=='center' ? ' justify-content-center' : (align=='right' ? ' justify-content-end' : '') %}
+        {% set classSize = (size is not defined) ? '' : size=='large' ? ' pagination-lg' : (size=='small' ? ' pagination-sm' : '') %}
+        <ul class="pagination{{ classAlign }}{{ classSize }} justify-content-center mb-0">
+
+            {% if previous is defined %}
+                <li class="">
+                    <a class="prev" rel="prev" href="{{ path(route, query|merge({(pageParameterName): previous})) }}"><i class="la la-angle-left"></i>{{ ''|trans({}, 'KnpPaginatorBundle') }}</a>
+                </li>
+            {% else %}
+                <li class="disabled" >
+                    <a class="prev"><i class="la la-angle-left"></i>{{ ''|trans({}, 'KnpPaginatorBundle') }}</a>
+                </li>
+            {% endif %}
+
+            {% if startPage > 1 %}
+                <li class="">
+                    <a class="" href="{{ path(route, query|merge({(pageParameterName): 1})) }}">1</a>
+                </li>
+                {% if startPage == 3 %}
+                    <li class="">
+                        <a class="" href="{{ path(route, query|merge({(pageParameterName): 2})) }}">2</a>
+                    </li>
+                {% elseif startPage != 2 %}
+                    <li class=" disabled">
+                        <span class="">&hellip;</span>
+                    </li>
+                {% endif %}
+            {% endif %}
+
+            {% for page in pagesInRange %}
+                {% if page != current %}
+                    <li class="">
+                        <a class="" href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
+                    </li>
+                {% else %}
+                    <li class="">
+                        <a class="active">{{ page }}</a>
+                    </li>
+                {% endif %}
+
+            {% endfor %}
+
+            {% if pageCount > endPage %}
+                {% if pageCount > (endPage + 1) %}
+                    {% if pageCount > (endPage + 2) %}
+                        <li class=" disabled">
+                            <a class="">&hellip;</a>
+                        </li>
+                    {% else %}
+                        <li class="">
+                            <a class="" href="{{ path(route, query|merge({(pageParameterName): (pageCount - 1)})) }}">{{ pageCount -1 }}</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+                <li class="">
+                    <a class="" href="{{ path(route, query|merge({(pageParameterName): pageCount})) }}">{{ pageCount }}</a>
+                </li>
+            {% endif %}
+
+            {% if next is defined %}
+                <li class="">
+                    <a class="next" rel="next" href="{{ path(route, query|merge({(pageParameterName): next})) }}">{{ ''|trans({}, 'KnpPaginatorBundle') }}<i class="la la-angle-right"></i></a>
+                </li>
+            {% else %}
+                <li  class=" disabled">
+                    <a class="next">{{ ''|trans({}, 'KnpPaginatorBundle') }}<i class="la la-angle-right"></i></a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}

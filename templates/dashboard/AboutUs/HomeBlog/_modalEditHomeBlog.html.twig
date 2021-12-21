@@ -1,0 +1,73 @@
+{% for homeBlog in homeBlog %}
+    <div id="modal-edit-homeBlog-{{ homeBlog.id }}" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold ml-3 h3">Edit HomeBlog</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ path('dashboard_edit_homeBlog',{ 'id' : homeBlog.id }) }}" method="POST"
+                      id="formEditHomeBlog" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <div class="form-group">
+                                    {# {{ product.productImage }} #}
+                                    <img src="{{ asset('uploads/homeBlog/') ~ homeBlog.homeImage }}" alt="{{ homeBlog.homeImage }}"
+                                         style="margin-left: 100px;" class="list-thumbnail responsive card-img-center img-thumbnail mb-4">
+                                    <input type="file" id="image" class="form-control chp mb-1 h6 font-weight-bold text-muted" placeholder="Image"
+                                           data-toggle="tooltip" title="(Facultatif)"
+                                           name="HomeBlogImage">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="HomeBlogTitle" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">
+                                        HomeBlog Title
+                                    </label>
+                                    <input type="text" id="HomeBlogTitle" class="form-control chp" placeholder="Title"
+                                           value="{{ homeBlog.homeTitle }}"
+                                           name="HomeBlogTitle" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="HomeBlogDescription" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">HomeBlog Description</label>
+                                    <textarea id="HomeBlogDescription" class="form-control" placeholder="Description" name="HomeBlogDescription" rows="4"
+                                              required>{{ homeBlog.homeDescription }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="HomeBlogContent" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">HomeBlog Content</label>
+                                    <input type="text" id="HomeBlogContent" class="form-control chp" placeholder="Content"
+                                           name="HomeBlogContent" value="{{ homeBlog.homeContent }}" required>
+                                </div>
+                            </div>
+
+
+
+                            <div class="msgerreur text-danger"></div>
+
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-light btn-shadow font-weight-bold" data-dismiss="modal">
+                            Cancel
+                        </button>
+                        <button class="btn btn-primary btn-shadow font-weight-bold" type="submit">
+                            Edit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endfor %}

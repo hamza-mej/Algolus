@@ -1,0 +1,220 @@
+{% extends 'Front/base.html.twig' %}
+
+{% block title %}Hello SHOP!{% endblock %}
+
+{% block body %}
+{#    <main>#}
+        <div class="main-wrapper ">
+            <div class="breadcrumb-area bg-img" style="background-image:url(assets/images/bg/breadcrumb.jpg);">
+                <div class="container">
+                    <div class="breadcrumb-content text-center">
+                        <h2>All Products</h2>
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_algolus') }}">Home</a>
+                            </li>
+                            <li class="active">All Products</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="shop-area pt-90 pb-90">
+                <div class="container js-filter">
+                    <div class="row flex-row-reverse">
+                        <div class="col-lg-9">
+                            <div class="shop-topbar-wrapper">
+                                <div class="shop-topbar-left">
+                                    <div class="view-mode nav">
+                                        <a class="active" href="#shop-1" data-toggle="tab"><i class="la la-th"></i></a>
+                                        <a href="#shop-2" data-toggle="tab"><i class="la la-list-ul"></i></a>
+                                    </div>
+                                    <p>Showing 1 - 20 of 30 results </p>
+                                </div>
+                                <div class="product-sorting-wrapper">
+                                    <div class="product-shorting shorting-style">
+                                        <label for="viewLabel">View:</label>
+{#                                        <select id="viewLabel">#}
+{#                                            <option value=""> 20</option>#}
+{#                                            <option value=""> 23</option>#}
+{#                                            <option value=""> 30</option>#}
+{#                                        </select>#}
+                                        <select   name="maxItemPerPage" id="maxItemPerPage">
+                                            <option value="2">2</option>
+                                            <option value="4">4</option>
+                                            <option value="6">6</option>
+                                        </select>
+                                    </div>
+                                    <div class="product-show shorting-style js-filter-sorting">
+{#                                        <label for="sortLabel">Sort by:</label>#}
+{#                                        <select id="sortLabel" name="nature" id="nature">#}
+{#                                            <option value="">Default</option>#}
+{#                                            <option value=""> Name</option>#}
+{#                                            <option value="price"></option>#}
+{#                                            {{ knp_pagination_sortable(products, 'Price', 'p.productPrice') }}#}
+{#                                        </select>#}
+                                        {% include 'Front/Product/_sorting.html.twig' %}
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shop-bottom-area">
+                                <div class="tab-content jump">
+                                    <div id="shop-1" class="tab-pane active">
+                                        <div class="row js-filter-content">
+                                            {% include 'Front/Product/_product.html.twig' %}
+                                        </div>
+                                    </div>
+                                    <div id="shop-2" class="tab-pane">
+                                        <div class="row js-filter-content-show">
+                                            {% include 'Front/Product/_product_show.html.twig' %}
+                                        </div>
+                                    </div>
+
+                                    <div class="js-filter-pagination">
+                                        {% include 'Front/Product/_pagination.html.twig' %}
+                                    </div>
+
+{#                                    <div class="pagination-style text-center">#}
+{#                                        <ul>#}
+{#                                            <li><a class="prev" href="#"><i class="la la-angle-left"></i></a></li>#}
+{#                                            <li><a href="#">01</a></li>#}
+{#                                            <li><a href="#">02</a></li>#}
+{#                                            <li><a class="active" href="#">03</a></li>#}
+{#                                            <li><a href="#">04</a></li>#}
+{#                                            <li><a href="#">05</a></li>#}
+{#                                            <li><a href="#">06</a></li>#}
+{#                                            <li><a class="next" href="#"><i class="la la-angle-right"></i></a></li>#}
+{#                                        </ul>#}
+{#                                    </div>#}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="sidebar-wrapper ">
+                                {{ form_start(formFilter, {attr: {class: 'js-filter-form'}}) }}
+                                <div class="sidebar-widget">
+                                    <h4 class="sidebar-title">Search </h4>
+                                    <div class="sidebar-search mb-40 mt-20">
+                                        {{ form_row(formFilter.q) }}
+
+{#                                        <form class="sidebar-search-form" action="#">#}
+{#                                            <button>#}
+{#                                                <i class="la la-search"></i>#}
+{#                                            </button>#}
+{#                                        </form>#}
+                                    </div>
+                                </div>
+                                <div class="sidebar-widget shop-sidebar-border pt-40">
+                                    <h4 class="sidebar-title">Shop By Categories</h4>
+                                    <div class="shop-category mt-20">
+                                        <ul>
+                                            <li>
+                                                <div class="sidebar-widget-list-left ">
+                                                    {{ form_row(formFilter.categories,
+                                                        { 'attr' : {'class' : ''} })
+                                                    }}
+{#                                                    <a href="#">Green <span>7</span> </a>#}
+{#                                                    <span class="checkmark"></span>#}
+                                                    <span class="checkmark"></span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+{#                                    <div class="shop-category mt-20">#}
+{#                                        <ul id="faq">#}
+{#                                            #}
+{#                                            {% for category in categories %}#}
+{#                                            <li> <a href="#">{{ category.CategoryName }}</a></li>#}
+{#                                            {% endfor %}#}
+{#                                        </ul>#}
+{#                                    </div>#}
+                                </div>
+                                <div class="shop-price-filter mt-35 shop-sidebar-border pt-40 sidebar-widget">
+                                    <h4 class="sidebar-title">Price Filter</h4>
+                                    <div class="price-filter mt-20">
+                                        <span>Range:  ${{ min }}.00 - {{ max }}.00 </span>
+
+{#                                        <div class="price-slider-amount" >#}
+{#                                            <div class="label-input">#}
+{#                                                    {{ form_row(formFilter.min, {#}
+{#                                                        'attr': {'class': 'd-inline-block'},#}
+{#                                                    }) }}#}
+{#                                                    {{ form_row(formFilter.max, {#}
+{#                                                        'attr': {'class': 'd-inline-block'},#}
+{#                                                    }) }}#}
+{#                                                <input type="text" id="amount" name="price" placeholder="Add Your Price" />#}
+{#                                            </div>#}
+{#                                            <button type="button">Filter</button>#}
+{#                                        </div>#}
+                                        <div class="price-slider-amount mb-4">
+                                            <div class="d-inline-block rounded  " style="width: 110px;">
+                                                {{ form_row(formFilter.min,
+                                                    { 'attr' : {'class' : 'pl-3'} }) }}
+                                            </div>
+                                            <div class="d-inline-block rounded  ml-2" style="width: 110px;">
+                                                {{ form_row(formFilter.max,
+                                                    { 'attr' : {'class' : 'pl-3'} }) }}
+                                            </div>
+                                        </div>
+                                        <div id="slider" data-min="{{ min }}" data-max="{{ max }}"></div>
+
+{#                                        <div id="slider"></div>#}
+                                    </div>
+                                </div>
+                                <div class="sidebar-widget shop-sidebar-border pt-40 mt-40">
+                                    <h4 class="sidebar-title">Refine By </h4>
+                                    <div class=" mt-20">
+
+                                        <ul>
+                                            <li>
+                                                <div class="sidebar-widget-list-left">
+
+{#                                                    <label for="onSale">En promotion</label>#}
+                                                    {{ form_row(formFilter.onSale) }}
+{#                                                    <span class="checkmark"></span>#}
+
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+{#                                <button type="submit" class="btn btn-primary w-100">Filtrer</button>#}
+
+                                <div class="sidebar-widget pt-40 mt-40 shop-sidebar-border">
+                                    <h4 class="sidebar-title">Colour </h4>
+                                    <div class="mt-20">
+                                        <ul>
+                                            <li>
+                                                <div class="sidebar-widget-list-left ">
+                                                    {{ form_row(formFilter.color) }}
+{#                                                    <span class="checkmark"></span>#}
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="sidebar-widget pt-40 mt-40 shop-sidebar-border">
+                                    <h4 class="sidebar-title">Size </h4>
+                                    <div class="mt-20">
+                                        <ul>
+                                            <li>
+                                                <div class="sidebar-widget-list-left">
+                                                    {{ form_row(formFilter.size) }}
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                {{ form_end(formFilter) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+{#    </main>#}
+{% endblock %}

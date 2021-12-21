@@ -1,0 +1,70 @@
+{% for personalInfo in personalInfo %}
+    <div id="modal-edit-personalInfo-{{ personalInfo.id }}" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold ml-3 h3">Edit PersonalInfo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ path('dashboard_edit_personalInfo',{ 'id' : personalInfo.id }) }}" method="POST"
+                      id="formEditPersonalInfo" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="PersonalInfoEmail" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">
+                                        PersonalInfo Email
+                                    </label>
+                                    <input type="text" id="PersonalInfoEmail" class="form-control chp" placeholder="E-mail"
+                                           value="{{ personalInfo.Email }}"
+                                           name="PersonalInfoEmail" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="PersonalInfoAddress" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">PersonalInfo Address</label>
+                                    <textarea id="PersonalInfoAddress" class="form-control" placeholder="Address" name="PersonalInfoAddress" rows="4"
+                                              required>{{ personalInfo.Address }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="PersonalInfoPhone" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">PersonalInfo Phone</label>
+                                    <input type="text" id="PersonalInfoPhone" step="0.1" class="form-control chp" placeholder="Phone"
+                                           name="PersonalInfoPhone" value="{{ personalInfo.Phone }}" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="PersonalInfoContent" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">PersonalInfo Content</label>
+                                    <input type="text" id="PersonalInfoContent" class="form-control chp" placeholder="Content"
+                                           name="PersonalInfoContent" value="{{ personalInfo.Content }}" required>
+                                </div>
+                            </div>
+
+
+
+                            <div class="msgerreur text-danger"></div>
+
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-light btn-shadow font-weight-bold" data-dismiss="modal">
+                            Cancel
+                        </button>
+                        <button class="btn btn-primary btn-shadow font-weight-bold" type="submit">
+                            Edit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endfor %}

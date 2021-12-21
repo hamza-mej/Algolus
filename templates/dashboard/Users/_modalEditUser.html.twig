@@ -1,0 +1,72 @@
+{% for user in users %}
+    <div id="modal-edit-user-{{ user.id }}" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold ml-3 h3">Edit User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ path('app_edit_user',{ 'id' : user.id }) }}" method="POST"
+                      id="formEditUser" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="emailUser" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">
+                                        User Email
+                                    </label>
+                                    <input type="text" id="emailUser" class="form-control chp" placeholder="E-mail"
+                                           value="{{ user.email }}"
+                                           name="emailUser" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="firstName" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">First Name</label>
+                                    <input type="text" id="firstName" step="0.1" class="form-control chp" placeholder="Prénom"
+                                           name="firstName" value="{{ user.FirstName }}" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="lastName" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">Last Name</label>
+                                    <input type="text" id="lastName" step="0.1" class="form-control chp" placeholder="Nom"
+                                           name="lastName" value="{{ user.LastName }}" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="selectRoles" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted ">Role List</label>
+                                    <select id="selectRoles" class="form-control" name="selectRoles">
+                                        <option selected="true" style="display:none;">Select Roles</option>
+                                        <option value="ROLE_USER">Utilisateur</option>
+                                        <option value="ROLE_EDITOR">Editeur</option>
+                                        <option value="ROLE_ADMIN">Administrateur</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="msgerreur text-danger"></div>
+
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-light btn-shadow font-weight-bold" data-dismiss="modal">
+                            Cancel
+                        </button>
+                        <button class="btn btn-primary btn-shadow font-weight-bold" type="submit">
+                            Edit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endfor %}

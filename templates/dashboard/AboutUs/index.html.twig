@@ -1,0 +1,111 @@
+{% extends 'dashboard/baseDashboard.html.twig' %}
+
+
+{% block title %}Hello AboutUs!{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>AboutUs</h1>
+                    <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+                        <ol class="breadcrumb pt-0">
+                            <li class="breadcrumb-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#">Library</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Data</li>
+                        </ol>
+                    </nav>
+                    <div class="separator mb-5"></div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <table class="data-table data-table-scrollable responsive "
+                                   data-order="[[ 1, &quot;desc&quot; ]]">
+                                <thead>
+                                <tr>
+                                    <th><i class="simple-icon-camera"></i>Image</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Content</th>
+                                    <th>Edit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for aboutUs in aboutUs %}
+                                    <tr>
+                                        <td style="width: 110px;">
+                                            <a class="d-flex" href="#">
+                                                <img src="{{ asset('uploads/aboutUs/') ~ aboutUs.image }}" alt="{{ aboutUs.image }}"
+                                                     class="list-thumbnail responsive card-img-left img-thumbnail">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <p class="text-muted">{{ aboutUs.title }}</p>
+                                        </td>
+                                        <td>
+                                            <textarea class="list-item-heading border-0" rows="4" cols="45">{{ aboutUs.description }}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea class="list-item-heading border-0" rows="4" cols="45">{{ aboutUs.content }}</textarea>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="badge badge-pill badge-secondary border-0 font-weight-bold mr-2"
+                                                    data-toggle="modal" data-target="#modal-edit-aboutUs-{{ aboutUs.id }}">
+                                                <i class="glyph-icon simple-icon-pencil" data-toggle="tooltip"
+                                                   data-placement="top"
+                                                   title="Edit">&nbsp; Edit</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                            {# Edit AboutUs modal #}
+                            {% include 'dashboard/AboutUs/_modalEditAboutUs.html.twig' %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <div class="footer-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <p class="mb-0 text-muted">ColoredStrategies 2019</p>
+                    </div>
+                    <div class="col-sm-6 d-none d-sm-block">
+                        <ul class="breadcrumb pt-0 pr-0 float-right">
+                            <li class="breadcrumb-item mb-0">
+                                <a href="#" class="btn-link">Review</a>
+                            </li>
+                            <li class="breadcrumb-item mb-0">
+                                <a href="#" class="btn-link">Purchase</a>
+                            </li>
+                            <li class="breadcrumb-item mb-0">
+                                <a href="#" class="btn-link">Docs</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+{% endblock %}

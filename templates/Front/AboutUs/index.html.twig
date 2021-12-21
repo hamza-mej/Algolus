@@ -1,0 +1,82 @@
+{% extends 'Front/base.html.twig' %}
+
+{% block title %}ABOUT US!{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="breadcrumb-area bg-img" style="background-image:url(assets/images/bg/breadcrumb.jpg);">
+            <div class="container">
+                <div class="breadcrumb-content text-center">
+                    <h2>About Us Page</h2>
+                    <ul>
+                        <li>
+                            <a href="{{ path('app_algolus') }}">Home</a>
+                        </li>
+                        <li class="active">about us </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="about-us-area pt-90 pb-90">
+            <div class="container">
+                <div class="row">
+                    {% for aboutUs in aboutUs %}
+                    <div class="col-lg-6 col-md-6">
+                        <div class="about-us-img text-center">
+                            <a href="#">
+                                <img src="{{ asset('uploads/aboutUs/') ~ aboutUs.image }}" alt="{{ aboutUs.image }}">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 align-self-center">
+                        <div class="about-us-content">
+                            <h2>{{ aboutUs.title }}</h2>
+                            <p class="peragraph-blog">{{ aboutUs.description }}</p>
+                            <p>{{ aboutUs.content }}</p>
+                            <div class="about-us-btn btn-hover hover-border-none">
+                                <a class="btn-color-white btn-color-theme-bg black-color" href="{{ path('app_product_shop') }}">Shop now!</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="feature-area pb-90 section-padding-3">
+            <div class="container">
+                <div class="feature-border feature-border-about">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="feature-wrap mb-30 text-center">
+                                <img src="assets/images/icon-img/feature-icon-1.png" alt="">
+                                <h5>Best Product</h5>
+                                <span>Best Queality Products</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="feature-wrap mb-30 text-center">
+                                <img src="assets/images/icon-img/feature-icon-2.png" alt="">
+                                <h5>100% fresh</h5>
+                                <span>Best Queality Products</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="feature-wrap mb-30 text-center">
+                                <img src="assets/images/icon-img/feature-icon-3.png" alt="">
+                                <h5>Secure Payment</h5>
+                                <span>Best Queality Products</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="feature-wrap mb-30 text-center">
+                                <img src="assets/images/icon-img/feature-icon-4.png" alt="">
+                                <h5>Best Wood</h5>
+                                <span>Best Queality Products</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

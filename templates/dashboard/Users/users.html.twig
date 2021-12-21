@@ -1,0 +1,118 @@
+{% extends 'dashboard/baseDashboard.html.twig' %}
+
+
+{% block title %}Hello CategoriesController!{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Utilisateurs</h1>
+                    <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+                        <ol class="breadcrumb pt-0">
+                            <li class="breadcrumb-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#">Library</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Data</li>
+                        </ol>
+                    </nav>
+                    <div class="separator mb-5"></div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <table class="data-table data-table-scrollable responsive nowrap"
+                                   data-order="[[ 1, &quot;desc&quot; ]]">
+                                <thead>
+                                <tr>
+                                    <th><i class="simple-icon-envelope"></i>&nbsp; E-mail </th>
+                                    <th>FirstName</th>
+                                    <th>LastName</th>
+                                    <th><i class="simple-icon-key"></i>&nbsp; Role </th>
+                                    <th>Edit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td>
+                                        <p class="text-muted">{{ user.Username }}</p>
+                                    </td>
+                                    <td>
+                                        <p class="list-item-heading">{{ user.FirstName }}</p>
+                                    </td>
+                                    <td>
+                                        <p class="list-item-heading">{{ user.LastName }}</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-muted">
+                                            {% for role in user.roles %}
+                                                {% if role == "ROLE_USER" %}
+                                                    Utilisateur
+                                                {% elseif role == "ROLE_EDITOR" %}
+                                                    Editeur
+                                                {% elseif role == "ROLE_ADMIN" %}
+                                                    Administrateur
+                                                    <i class="simple-icon-key"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="badge badge-pill badge-secondary border-0 font-weight-bold mr-2 font-weight-bold"
+                                                data-toggle="modal" data-target="#modal-edit-user-{{ user.id }}">
+                                            <i class="glyph-icon simple-icon-pencil" data-toggle="tooltip"
+                                               data-placement="top"
+                                               title="Edit">&nbsp; Edit</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                            {# Edit User modal #}
+                            {% include 'dashboard/Users/_modalEditUser.html.twig' %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <div class="footer-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <p class="mb-0 text-muted">ColoredStrategies 2019</p>
+                    </div>
+                    <div class="col-sm-6 d-none d-sm-block">
+                        <ul class="breadcrumb pt-0 pr-0 float-right">
+                            <li class="breadcrumb-item mb-0">
+                                <a href="#" class="btn-link">Review</a>
+                            </li>
+                            <li class="breadcrumb-item mb-0">
+                                <a href="#" class="btn-link">Purchase</a>
+                            </li>
+                            <li class="breadcrumb-item mb-0">
+                                <a href="#" class="btn-link">Docs</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+{% endblock %}

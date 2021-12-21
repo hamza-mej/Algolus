@@ -46,6 +46,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 //    #[ORM\Column(type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'] )]
     private $updatedAt;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $country;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private $address;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $city;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $state;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $postCode;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private $phone;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -147,6 +165,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->setUpdatedAt(new \DateTimeImmutable);
     }
 
+    public function getFullName(): ?string
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
     public function getFirstName(): ?string
     {
         return $this->firstName;
@@ -191,6 +214,78 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
+
+    public function setState(?string $state): self
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    public function getPostCode(): ?string
+    {
+        return $this->postCode;
+    }
+
+    public function setPostCode(?string $postCode): self
+    {
+        $this->postCode = $postCode;
+
+        return $this;
+    }
+
+    public function getPhone(): ?int
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?int $phone): self
+    {
+        $this->phone = $phone;
 
         return $this;
     }

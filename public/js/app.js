@@ -1,34 +1,108 @@
-$(document).ready(function (){
-    $('.editBtnProduct').on('click', function (){
-        $('#myModalEditProduct').modal('show');
 
+$(document).ready(function () {
+    $('.editBtnUser').on('click', function () {
+        $('#myModalEditUser').modal('show');
 
         var Id = $(this).attr("data-id");
-        var Url = "/productedit"+Id
-        $('#formEdit').attr("action",Url);
+        var Url = "/editUser" + Id
+        $('#formEditUser').attr("action", Url);
 
-        // $('#name').val($(this).attr("data-id"));
-        $('#name').val($(this).attr("data-name"));
-        $('#price').val($(this).attr("data-price"));
-
-        $('#description').val($(this).attr("data-description"));
+        $('#email').val($(this).attr("data-email"));
+        $('#firstName').val($(this).attr("data-FirstName"));
+        $('#lastName').val($(this).attr("data-LastName"));
     })
 });
 
-$(document).ready(function (){
-    $('.editBtnCategory').on('click', function (){
-        $('#myModalEditCategory').modal('show');
-
+$(document).ready(function () {
+    $('.editBtnBlog').on('click', function () {
+        $('#myModalEditBlog').modal('show');
 
         var Id = $(this).attr("data-id");
-        var Url = "/categoryedit"+Id
-        $('#formEditCategory').attr("action",Url);
+        var Url = "/blog_edit" + Id
+        $('#formEditBlog').attr("action", Url);
 
-        // $('#name').val($(this).attr("data-id"));
-        $('#name').val($(this).attr("data-name"));
-        $('#description').val($(this).attr("data-description"));
+        $('#BlogTitle').val($(this).attr("data-title"));
+        $('#BlogDescription').val($(this).attr("data-description"));
+        $('#BlogImage').val($(this).attr("data-image"));
+    });
+
+    $('.editBtnUser').on('click', function () {
+        $('#myModalEditUser').modal('show');
+
+        var Id = $(this).attr("data-id");
+        var Url = "/editUser" + Id
+        $('#formEditUser').attr("action", Url);
+
+        $('#email').val($(this).attr("data-email"));
+        $('#firstName').val($(this).attr("data-FirstName"));
+        $('#lastName').val($(this).attr("data-LastName"));
+    });
+
+    $('.editBtnAboutUs').on('click', function () {
+        $('#myModalEditAboutUs').modal('show');
+
+        var Id = $(this).attr("data-id");
+        var Url = "/edit_about_us" + Id
+        $('#formEditAboutUs').attr("action", Url);
+
+        $('#AboutUsTitle').val($(this).attr("data-title"));
+        $('#AboutUsDescription').val($(this).attr("data-description"));
+        $('#AboutUsContent').val($(this).attr("data-content"));
+    })
+
+    $('.editBtnHomeBlog').on('click', function () {
+        $('#myModalEditHomeBlog').modal('show');
+
+        var Id = $(this).attr("data-id");
+        var Url = "/edit_home_blog" + Id
+        $('#formEditHomeBlog').attr("action", Url);
+
+        $('#HomeBlogTitle').val($(this).attr("data-title"));
+        $('#HomeBlogDescription').val($(this).attr("data-description"));
+        $('#HomeBlogContent').val($(this).attr("data-content"));
+    })
+
+    $('.editBtnBanner').on('click', function () {
+        $('#myModalEditBanner').modal('show');
+
+        var Id = $(this).attr("data-id");
+        var Url = "/edit_banner" + Id
+        $('#formEditBanner').attr("action", Url);
+
+        $('#BannerSupTitle').val($(this).attr("data-supTitle"));
+        $('#BannerTitle').val($(this).attr("data-title"));
+        $('#BannerDescription').val($(this).attr("data-description"));
+    })
+
+    $('.editBtnSecondBanner').on('click', function () {
+        $('#myModalEditSecondBanner').modal('show');
+
+        var Id = $(this).attr("data-id");
+        var Url = "/edit_second_banner" + Id
+        $('#formEditSecondBanner').attr("action", Url);
+
+        $('#SecondBannerTitle').val($(this).attr("data-title"));
+        $('#SecondBannerDescription').val($(this).attr("data-description"));
     })
 });
+
+
+// $(document).ready(function (){
+//     $('.editBtnCategory').on('click', function (){
+//         $('#myModalEditCategory').modal('show');
+//
+//
+//         var Id = $(this).attr("data-id");
+//         var Url = "/categoryedit"+Id
+//         $('#formEditCategory').attr("action",Url);
+//
+//         // $('#name').val($(this).attr("data-id"));
+//         $('#name').val($(this).attr("data-name"));
+//         $('#image').val($(this).attr("data-image"));
+//         // $('#description').val($(this).attr("data-description"));
+//     })
+// });
+
 
 // $(document).ready(function (){
 //     $('.deleteBtn').on('click', function (){
@@ -51,7 +125,7 @@ $(document).ready(function (){
 // });
 
 
-function sweetalertclick(e){
+function sweetalertclick(e) {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
