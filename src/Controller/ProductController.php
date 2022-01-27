@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Data\SearchData;
+use App\Entity\Details;
 use App\Entity\Product;
 use App\Form\SearchForm;
 use App\Repository\BannerRepository;
+use App\Repository\DetailsRepository;
 use App\Repository\HomeBlogRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SecondBannerRepository;
@@ -58,9 +60,22 @@ class ProductController extends AbstractController
 
     #[Route('/shop', name: 'app_product_shop')]
 
-    public function shop(CartService $cartService, ProductRepository $productRepository, Request $request,$maxItemPerPage=2,
+    public function shop(DetailsRepository $detailsRepository, CartService $cartService, ProductRepository $productRepository, Request $request,$maxItemPerPage=2,
                          ): Response
     {
+
+//        if($request->isXmlHttpRequest()){
+//
+//            $s = $request->getContent();
+////            $param = json_decode($s);
+//
+//
+//
+//            $SizeOfColorView = $detailsRepository->findSizeOfColor(84, $s);
+//
+//            dd($SizeOfColorView);
+//
+//        }
 
 //        $data = $productRepository->findAll();
 //        $products = $paginator->paginate(
@@ -110,14 +125,46 @@ class ProductController extends AbstractController
     }
 
     #[Route('/shopShow{id}', name: 'app_shop_show')]
-    public function show(CartService $cartService, Product $product): Response
+    public function show(DetailsRepository $detailsRepository, CartService $cartService, Product $product, Request $request): Response
     {
+
+//        dd($sizeView);
+//         $sizeView2 = '';
+
+        if($request->isXmlHttpRequest()){
+
+
+            $s = $request->getContent();
+
+
+            $ok = 'Je Suis';
+
+            return $this->render('Front/Product/_sizeDetails.html.twig', [
+                 'ok' => $ok,
+            ]);
+
+        }
+
+//        if ($request->get('ajax')){
+//            $ok = 'Je Suis';
+//            return new JsonResponse([
+//                'size' => $this->renderView('Front/Product/_sizeDetails.html.twig', ['ok' => $ok]),
+//            ]);
+//        }
+
+        $colorView = $detailsRepository->findColor($product->getId());
+        $sizeView = $detailsRepository->findSize($product->getId());
 
         return $this->render('Front/Product/productDetails.html.twig', [
             'product' => $product,
             'items' => $cartService->getFullCart(),
             'total' => $cartService->getTotal(),
             'user' => $this->getUser(),
+            'colorView' => $colorView,
+            'sizeView' => $sizeView,
+//            'sizeView2' => $sizeView2,
+
         ]);
+
     }
 }

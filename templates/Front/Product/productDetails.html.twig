@@ -23,7 +23,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="product-details-img">
                             <div class="zoompro-border zoompro-span">
-                                <img class="zoompro" src="{{ vich_uploader_asset(product) }}" data-zoom-image="{{ vich_uploader_asset(product) }}" alt="{{ product.productName }}" /> <span>-29%</span>
+                                <img class="zoompro" src="{{ asset('uploads/product/') ~ product.productImage }}" data-zoom-image="{{ asset('uploads/product/') ~ product.productImage }}" alt="{{ product.productName }}" /> <span>-29%</span>
                             </div>
                             <div id="gallery" class="mt-20 product-dec-slider">
                                 <a data-image="assets/images/product-details/product-detalis-l1.jpg" data-zoom-image="assets/images/product-details/product-detalis-bl1.jpg">
@@ -46,8 +46,8 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="product-details-content pro-details-content-modify">
-                            <span>{{ product.productDescription }}</span>
                             <h2>{{ product.productName }}</h2>
+                            <span>{{ product.productDescription|striptags|length > 17 ? product.productDescription|slice(0, 17) ~ '...' : product.productDescription|striptags }}</span>
                             <div class="product-ratting-review">
                                 <div class="product-ratting">
                                     <i class="la la-star"></i>
@@ -62,25 +62,60 @@
                             </div>
                             <div class="pro-details-color-wrap">
                                 <span>Color:</span>
-                                <div class="pro-details-color-content">
-                                    <ul>
-                                        <li class="green"></li>
-                                        <li class="yellow"></li>
-                                        <li class="red"></li>
-                                        <li class="blue"></li>
-                                    </ul>
+                                <div class="pro-details-color-content ">
+                                    {% for colorView in colorView %}
+                                        <ul >
+                                        {% if colorView.Color == 'black' %}
+                                            <li class="bg-dark colorChoice" data-color="black" ></li>
+                                        {% elseif colorView.Color == 'red' %}
+                                           <li class="red colorChoice" data-color="red"></li>
+                                        {% elseif colorView.Color == 'yellow' %}
+                                            <li class="yellow colorChoice" data-color="yellow"></li>
+                                        {% elseif colorView.Color == 'white' %}
+                                            <li class="white colorChoice" data-color="white"></li>
+                                        {% elseif colorView.Color == 'green' %}
+                                            <li class="green colorChoice" data-color="green"></li>
+                                        {% endif %}
+                                        </ul>
+{#                                    {{ colorView|json_encode()|raw }}#}
+                                    {% endfor %}
                                 </div>
                             </div>
                             <div class="pro-details-size">
                                 <span>Size:</span>
-                                <div class="pro-details-size-content">
-                                    <ul>
-                                        <li><a href="#">s</a></li>
-                                        <li><a href="#">m</a></li>
-                                        <li><a href="#">xl</a></li>
-                                        <li><a href="#">xxl</a></li>
-                                    </ul>
+                                <div class="pro-details-size-content d-flex flex-row " >
+                                    {% for sizeView in sizeView %}
+                                        <ul class="mr-5">
+                                            {% if sizeView.Size == 's' %}
+                                            <li class="color"><a href="#">s</a></li>
+                                            {% elseif sizeView.Size == 'm' %}
+                                            <li class="color"><a href="#">m</a></li>
+                                            {% elseif sizeView.Size == 'l' %}
+                                            <li class="color"><a href="#">l</a></li>
+                                            {% elseif sizeView.Size == 'xl' %}
+                                            <li class="color"><a href="#">xl</a></li>
+                                            {% elseif sizeView.Size == 'xxl' %}
+                                            <li class="color"><a href="#">xxl</a></li>
+                                            {% endif %}
+                                        </ul>
+                                    {% endfor %}
                                 </div>
+
+                                <div class="pro-details-size-content d-flex flex-row " >
+                                {% include 'Front/Product/_sizeDetails.html.twig' %}
+                                </div>
+{#                                <div class="pro-details-size-content d-flex flex-row " >#}
+{#                                    {% if ok is defined %}#}
+{#                                        <ul class="mr-5">#}
+{#                                            <li class="color"><a href="#">{{ ok }}</a></li>#}
+{#                                        </ul>#}
+{#                                    {% endif %}#}
+{#                                    {% for ok in ok %}#}
+{#                                        <ul class="mr-5">#}
+{#                                            <li class="color"><a href="#">{{ ok }}</a></li>#}
+{#                                        </ul>#}
+{#                                    {% endfor %}#}
+{#                                </div>#}
                             </div>
                             <div class="pro-details-price-wrap">
                                 <div class="product-price">
@@ -400,4 +435,45 @@
 
 
     </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('/assets/js/vendor/jquery-3.3.1.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script >
+
+
+
+        $(document).ready(function () {
+            // $(".color2").hide();
+            /* when any radio element is clicked, Get the attribute value of that clicked radio element and show the radio_content div element which matches the attribute value and hide the remaining tab content div elements */
+            $(".colorChoice").click(function(){
+                var dataSend = $(this).attr("data-color");
+                // alert(current_raido);
+                // $(".color").hide();
+                // $(".color2").show();
+
+
+                // console.log(dataSend);
+                $.ajax({
+                    url: "{{ path('app_shop_show',{ 'id': product.id }) }}",
+                    type: "POST",
+                    data: dataSend,
+                    success: function (data) {
+                        // // if(data == dataSend) console.log("ok");
+                        console.log("OK");
+                        // alert('ok')
+                    },
+                    error: function (data) {
+                        alert("fail");
+                    }
+                });
+
+            })
+
+        });
+
+
+    </script>
+
 {% endblock %}

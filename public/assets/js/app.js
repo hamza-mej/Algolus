@@ -4,6 +4,8 @@ import Filter from './modules/Filter.js'
 
 new Filter(document.querySelector('.js-filter'));
 
+// new Filter(document.querySelector('.js-details'));
+
 const slider = document.getElementById('slider');
 
 if (slider){
@@ -83,6 +85,36 @@ $(document).ready(function() {
 
     });
 });
+
+// $(document).ready(function () {
+//     $(".color2").hide();
+//     /* when any radio element is clicked, Get the attribute value of that clicked radio element and show the radio_content div element which matches the attribute value and hide the remaining tab content div elements */
+//     $(".colorChoice").click(function(){
+//         var dataSend = $(this).attr("data-color");
+//         // alert(current_raido);
+//         $(".color").hide();
+//         $(".color2").show();
+//
+//
+//         // console.log(dataSend);
+//         $.ajax({
+//             url: '/shopShow',
+//             type: "POST",
+//             data: dataSend,
+//             success: function (data) {
+//                 // // if(data == dataSend) console.log("ok");
+//                 console.log("OK");
+//                 // alert('ok')
+//             },
+//             error: function (data) {
+//                 alert("fail");
+//             }
+//         });
+//
+//     })
+//
+// });
+
 
 
 $('#maxItemPerPage').change(function(){

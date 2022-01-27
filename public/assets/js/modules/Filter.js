@@ -14,12 +14,14 @@ export default class Filter {
         if (element === null) {
             return
         }
-        // console.log('aaaaa')
+        // console.log('aaaaggggggggga')
         this.pagination = element.querySelector('.js-filter-pagination')
         this.content = element.querySelector('.js-filter-content')
         this.contentShow = element.querySelector('.js-filter-content-show')
         this.sorting = element.querySelector('.js-filter-sorting')
         this.form = element.querySelector('.js-filter-form')
+        // this.size = element.querySelector('.js-size')
+        // this.color = element.querySelector('.js-color')
         this.bindEvents()
     }
 
@@ -35,6 +37,7 @@ export default class Filter {
         }
         this.sorting.addEventListener('click', aClickListener)
         this.pagination.addEventListener('click', aClickListener)
+        // this.color.addEventListener('click', aClickListener)
 
         this.form.querySelectorAll('input').forEach(input => {
             input.addEventListener('change', this.loadForm.bind(this))
@@ -68,6 +71,7 @@ export default class Filter {
             this.contentShow.innerHTML = data.contentShow
             this.sorting.innerHTML = data.sorting
             this.pagination.innerHTML = data.pagination
+            // this.size.innerHTML = data.size
 
             this.updatePrices(data)
             params.delete('ajax')

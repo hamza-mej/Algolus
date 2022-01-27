@@ -26,6 +26,31 @@ class ProductRepository extends ServiceEntityRepository
         $this->paginator = $paginator;
     }
 
+//    public function findColor(int $search): QueryBuilder
+//    {
+////        $entityManager = $this->getEntityManager();
+//
+////        $query = $this->createQueryBuilder(
+////            'SELECT *
+////            FROM App\Entity\Product p, App\Entity\Details d,
+////            WHERE p == :id
+////            AND d.productId == :id
+////            ORDER BY p.id ASC'
+////        )->setParameter('id', $search);
+//        $query = $this
+//            ->createQueryBuilder('p')
+//            ->select('d','p')
+//            ->join('p.category','d')
+//            ->select('color','p')
+//            ->join('p.color','color')
+//            ->select('size','p')
+//            ->join('p.size','size');
+//
+//
+//        // returns an array of Product objects
+//        return $query;
+//    }
+
     /**
      * @param SearchData $search
      * @return PaginationInterface

@@ -1,118 +1,214 @@
 
-$(document).ready(function () {
-    $('.editBtnUser').on('click', function () {
-        $('#myModalEditUser').modal('show');
-
-        var Id = $(this).attr("data-id");
-        var Url = "/editUser" + Id
-        $('#formEditUser').attr("action", Url);
-
-        $('#email').val($(this).attr("data-email"));
-        $('#firstName').val($(this).attr("data-FirstName"));
-        $('#lastName').val($(this).attr("data-LastName"));
-    })
-});
-
-$(document).ready(function () {
-    $('.editBtnBlog').on('click', function () {
-        $('#myModalEditBlog').modal('show');
-
-        var Id = $(this).attr("data-id");
-        var Url = "/blog_edit" + Id
-        $('#formEditBlog').attr("action", Url);
-
-        $('#BlogTitle').val($(this).attr("data-title"));
-        $('#BlogDescription').val($(this).attr("data-description"));
-        $('#BlogImage').val($(this).attr("data-image"));
-    });
-
-    $('.editBtnUser').on('click', function () {
-        $('#myModalEditUser').modal('show');
-
-        var Id = $(this).attr("data-id");
-        var Url = "/editUser" + Id
-        $('#formEditUser').attr("action", Url);
-
-        $('#email').val($(this).attr("data-email"));
-        $('#firstName').val($(this).attr("data-FirstName"));
-        $('#lastName').val($(this).attr("data-LastName"));
-    });
-
-    $('.editBtnAboutUs').on('click', function () {
-        $('#myModalEditAboutUs').modal('show');
-
-        var Id = $(this).attr("data-id");
-        var Url = "/edit_about_us" + Id
-        $('#formEditAboutUs').attr("action", Url);
-
-        $('#AboutUsTitle').val($(this).attr("data-title"));
-        $('#AboutUsDescription').val($(this).attr("data-description"));
-        $('#AboutUsContent').val($(this).attr("data-content"));
-    })
-
-    $('.editBtnHomeBlog').on('click', function () {
-        $('#myModalEditHomeBlog').modal('show');
-
-        var Id = $(this).attr("data-id");
-        var Url = "/edit_home_blog" + Id
-        $('#formEditHomeBlog').attr("action", Url);
-
-        $('#HomeBlogTitle').val($(this).attr("data-title"));
-        $('#HomeBlogDescription').val($(this).attr("data-description"));
-        $('#HomeBlogContent').val($(this).attr("data-content"));
-    })
-
-    $('.editBtnBanner').on('click', function () {
-        $('#myModalEditBanner').modal('show');
-
-        var Id = $(this).attr("data-id");
-        var Url = "/edit_banner" + Id
-        $('#formEditBanner').attr("action", Url);
-
-        $('#BannerSupTitle').val($(this).attr("data-supTitle"));
-        $('#BannerTitle').val($(this).attr("data-title"));
-        $('#BannerDescription').val($(this).attr("data-description"));
-    })
-
-    $('.editBtnSecondBanner').on('click', function () {
-        $('#myModalEditSecondBanner').modal('show');
-
-        var Id = $(this).attr("data-id");
-        var Url = "/edit_second_banner" + Id
-        $('#formEditSecondBanner').attr("action", Url);
-
-        $('#SecondBannerTitle').val($(this).attr("data-title"));
-        $('#SecondBannerDescription').val($(this).attr("data-description"));
-    })
-});
-
-
-// $(document).ready(function (){
-//     $('.editBtnCategory').on('click', function (){
-//         $('#myModalEditCategory').modal('show');
-//
+// $(document).ready(function () {
+//     $('.editBtnUser').on('click', function () {
+//         $('#myModalEditUser').modal('show');
 //
 //         var Id = $(this).attr("data-id");
-//         var Url = "/categoryedit"+Id
-//         $('#formEditCategory').attr("action",Url);
+//         var Url = "/editUser" + Id
+//         $('#formEditUser').attr("action", Url);
 //
-//         // $('#name').val($(this).attr("data-id"));
-//         $('#name').val($(this).attr("data-name"));
-//         $('#image').val($(this).attr("data-image"));
-//         // $('#description').val($(this).attr("data-description"));
+//         $('#email').val($(this).attr("data-email"));
+//         $('#firstName').val($(this).attr("data-FirstName"));
+//         $('#lastName').val($(this).attr("data-LastName"));
 //     })
 // });
 
 
-// $(document).ready(function (){
-//     $('.deleteBtn').on('click', function (){
-//         $('#myModalDelete').modal('show');
+
+
+$(document).ready(function () {
+    /* by default hide all radio_content div elements except first element */
+    $(".content .radio_content").hide();
+    $(".content .radio_content:first-child").show();
+
+    /* when any radio element is clicked, Get the attribute value of that clicked radio element and show the radio_content div element which matches the attribute value and hide the remaining tab content div elements */
+    $(".radio_wrap").click(function(){
+        var current_raido = $(this).attr("data-radio");
+        $(".content .radio_content").hide();
+        $("."+current_raido).show();
+    })
+
+});
+
+
+// function text(x){
+//     if(x == 0) {
+//         document.getElementById('myForm').style.display = 'block';
+//         document.getElementById('myForm2').style.display = 'none';
+//     }
 //
-//         var Id = $(this).attr("delete-id");
-//         var Url = "/delete"+Id
-//         $('#formDelete').attr("action",Url);
-//     })
-// })
+//     if(x == 1) {
+//         document.getElementById('myForm').style.display = 'none';
+//         document.getElementById('myForm2').style.display = 'block';
+//     }
+//     return;
+// }
+
+// $('#yesCheck').click(function() {
+//     document.getElementById('ifYes').style.display = 'none';
+//     else
+// });
+// $('#noCheck').click(function() {
+//     document.getElementById('ifYes').style.display = 'none';
+// });
+
+
+$(document).ready(function () {
+
+    const Table = new Array();
+    // $('.addField').on('click', function () {
+    //
+    //         // Table.color = $('.selectColor option:selected').text();
+    //         // Table.size = $('.selectSize option:selected').text();
+    //         // Table.qty = $('.selectQty ').val();
+    //
+    //         Table.push({  "ProductSelected" : $('.selectProduct option:selected:last').val(),
+    //                       "color" : $('.selectColor option:selected:last').text(),
+    //                       "size" : $('.selectSize option:selected:last').text(),
+    //                       "qty" : $('.selectQty:last ').val()
+    //                     });
+    //         console.log(Table);
+    //
+    //         str = JSON.stringify(Table);
+    //
+    //         document.getElementById("demo").innerHTML = str;
+    //     })
+
+
+    $('.addField').on('click', function () {
+
+        // Table.color = $('.selectColor option:selected').text();
+        // Table.size = $('.selectSize option:selected').text();
+        // Table.qty = $('.selectQty ').val();
+
+        Table.push({  "ProductSelected" : $('.selectProduct option:selected:last').val(),
+                      "color" : $('.selectColor option:selected:last').text(),
+                      "size" : $('.selectSize option:selected:last').text(),
+                      "qty" : $('.selectQty:last ').val()
+                    });
+
+        str = JSON.stringify(Table);
+
+        document.getElementById("demo").innerHTML = str;
+    })
+
+    $('.removeField').on('click', function () {
+
+        if ( Table.find($('.selectProduct:last').val()) && Table.includes($('.selectColor:last').val())
+            && Table.includes($('.selectSize:last').val())  && Table.includes($('.selectQty:last').val())  ){
+            // Table.pop();
+            alert('delete')
+        } else {
+            // return Table
+            alert('ok')
+        }
+
+        //
+        // if ( Table.ProductSelected === ($('.selectProduct:last').val()) && Table.color === ($('.selectColor:last').val())
+        //     && Table.size === ($('.selectSize:last').val())  && Table.qty ===($('.selectQty:last').val())  ){
+        //     alert('delete')
+        // } else {
+        //     // return Table
+        //     alert('stay')
+        // }
+
+        // if (
+        //     // $('.selectProduct:last').val() &&
+        //     $('.selectColor:last').val()
+        //     && $('.selectSize:last').val() && $('.selectQty:last').val() )
+        // {
+        //     Table.pop({
+        //         // "ProductSelected" : $('.selectProduct option:selected:last').val(),
+        //         "color" : $('.selectColor option:selected:last').text(),
+        //         "size" : $('.selectSize option:selected:last').text(),
+        //         "qty" : $('.selectQty:last ').val()
+        //     });
+        // }else
+        //     Table.pop();
+
+
+
+        str = JSON.stringify(Table);
+
+        document.getElementById("demoDelete").innerHTML = str;
+    })
+
+
+    // var Url = "/create-stock"
+    // $('#formEditUser').attr("action", Url);
+
+    $('.addToController').on('click',function (e) {
+        // e.preventDefault();
+        if ( $('.selectProduct').val() && $('.selectColor').val()
+            && $('.selectSize').val() && $('.selectQty').val() )
+        {
+            Table.push({  "ProductSelected" : $('.selectProduct option:selected:last').val(),
+                "color" : $('.selectColor option:selected:last').text(),
+                "size" : $('.selectSize option:selected:last').text(),
+                "qty" : $('.selectQty:last ').val()
+            });
+        }
+
+
+        var dataSend = JSON.stringify(Table);
+        // console.log(dataSend);
+
+        $.ajax({
+            url: "/create-stock",
+            type: "POST",
+            data: dataSend,
+            success: function (data) {
+                // // if(data == dataSend) console.log("ok");
+                console.log("OK");
+                // alert('ok')
+            },
+            error: function (data) {
+                alert("fail");
+            }
+        });
+    });
+
+});
+
+
+// $('[name="size[]"]').clone().appendTo('#testSize');
+// $('.qtyProduct').clone().find('input').val('').end().appendTo('#testQty');
+// // $('#firstProduct .testRemove').clone().appendTo('#testRemove');
+
+$(document).ready(function () {
+    $('.addField').on('click', function () {
+        $('#firstProduct [name="color[]"]').clone().appendTo('#testColor');
+        $('#firstProduct [name="size[]"]').clone().appendTo('#testSize');
+        $('#firstProduct .qtyProduct').clone().find('input').val('').end().appendTo('#testQty');
+        $('#firstProduct .testRemove').clone().appendTo('#testRemove');
+    })
+
+    $('.removeField').on('click', function () {
+        $('#testColor [name="color[]"]').last().remove();
+        $('#testSize [name="size[]"]').last().remove();
+        $('#testQty [name="qty"]').last().remove();
+        $('#testRemove .testRemove').last().remove();
+    })
+});
+
+$(document).ready(function () {
+    $('.addFieldStandard').on('click', function () {
+        $('#firstProductStandard [name="colorStandard[]"]').clone().appendTo('#testColorStandard');
+        $('#firstProductStandard [name="sizeStandard[]"]').clone().appendTo('#testSizeStandard');
+        $('#firstProductStandard .qtyProductStandard').clone().find('input').val('').end().appendTo('#testQtyStandard');
+        // $('#firstProduct .testRemove').clone().appendTo('#testRemoveStandard');
+    })
+
+    $('.removeFieldStandard').on('click', function () {
+        $('[name="colorStandard[]"]').last().remove();
+        $('[name="sizeStandard[]"]').last().remove();
+        $('[name="qtyStandard"]').last().remove();
+        // $('.testRemoveStandard').last().remove();
+    })
+});
+
+
+
 
 // $(document).ready(function (){
 //     $('.deleteBtn').on('click', function (){

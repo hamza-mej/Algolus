@@ -1,0 +1,284 @@
+
+<div id="myModalAddStock" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header content">
+                <h5 class="modal-title font-weight-bold ml-3 h3 radio_content radio_1">Add Stock / Choose Your Size</h5>
+                <h5 class="modal-title font-weight-bold ml-3 h3 radio_content radio_2">Add Stock / Standard Size</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body d-flex justify-content-center">
+                    <div class="input-group w-25 mr-3 radio_wrap" data-radio="radio_1">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="radio" id="radio1" name="radio" aria-label="Radio button for following text input" checked>
+                            </div>
+                        </div>
+                        <label for="radio1" class="form-control font-weight-bold" style="padding-top: 12px;"> Choose Your Size </label>
+                    </div>
+
+                    <div class="input-group w-25 radio_wrap" data-radio="radio_2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="radio" id="radio2" name="radio" aria-label="Radio button for following text input" >
+                            </div>
+                        </div>
+                        <label for="radio2" class="form-control font-weight-bold" style="padding-top: 12px;"> Standard Size </label>
+                    </div>
+                </div>
+            </div>
+
+
+{#            <div class="payment-method d-flex">#}
+{#                <div class="pay-top sin-payment">#}
+{#                    <input id="payment_method_1" class="input-radio" type="radio" value="cheque" onclick="text(0)" name="payment_method">#}
+{#                    <label for="payment_method_1"> Direct Bank Transfer </label>#}
+
+{#                </div>#}
+{#                <div class="pay-top sin-payment">#}
+{#                    <input id="payment-method-2" class="input-radio" type="radio" value="cheque" onclick="text(1)" name="payment_method">#}
+{#                    <label for="payment-method-2">Check payments</label>#}
+{#                </div>#}
+{#            </div>#}
+
+            <div class="content">
+{#                {{ path('dashboard_create_stock') }}#}
+                <form class="radio_content radio_1"
+                      id="formAddStock" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row">
+
+
+                            <div class="col-md-12 d-flex justify-content-center mb-5">
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label for="product" class="form-group has-float-label mb-1 h5 font-weight-bold text-muted d-flex justify-content-center">
+                                            Product List
+                                        </label>
+                                        <select class="form-control mt-2 selectProduct" id="product" name="selectProduct">
+                                            <option selected="true" style="display:none;">Select Product</option>
+                                            {% for product in products %}
+                                                <option
+                                                        value="{{ product.id }}">{{ product.productName }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <hr size="8" width="90%" color="#00365A">
+                                    </div>
+                                </div>
+                            </div><br><br>
+
+                            <div class="col-md-4 ">
+                                <div class="form-group " id="firstProduct">
+                                    <label for="selectColor" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">
+                                        Color List
+                                    </label>
+                                    <select class="form-control mt-2 selectColor"  id="selectColor" name="color[]">
+                                        <option selected="true" style="display:none;">Select Color</option>
+                                        {% for color in color %}
+                                            <option
+                                                    value="{{ color.id }}">{{ color.colorName }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 ">
+                                <div class="form-group " id="firstProduct">
+                                    <label for="selectSize" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">
+                                        Size List
+                                    </label>
+                                    <select class="form-control mt-2 selectSize" id="selectSize" name="size[]">
+                                        <option selected="true" style="display:none;">Select Size</option>
+                                        {% for size in size %}
+                                            <option
+                                                    value="{{ size.id }}">{{ size.sizeName }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 ">
+                                <div id="firstProduct">
+                                    <div class="form-group " >
+                                        <label for="selectQty" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">
+                                            Qty
+                                        </label>
+                                        <div class="qtyProduct">
+                                            <input type="number" step="1" class="mt-2 qty form-control chp selectQty" id="selectQty[]" placeholder="Qty" name="qty"  required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 ">
+                                <label for="Color" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted d-flex justify-content-center">
+                                    &nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+
+                                </label>
+                                <div class="form-group d-flex" id="firstProduct">
+
+                                    <span  class="mt-2 removeField btn btn-outline-danger handle testRemove mr-2" >-</span>
+                                    <span class="mt-2 addField btn btn-outline-success handle ">+</span>
+                                </div>
+                            </div>
+
+
+
+                            {#                        <div class="col-md-12" >#}
+                            <div class="col-md-4 d-inline-block" id="testColor">
+                            </div>
+                            <div class="col-md-4 d-inline-block" id="testSize">
+                            </div>
+                            <div class="col-md-2 d-inline-block" id="testQty">
+                            </div>
+                            <div class="col-md-2 d-inline-block" id="testRemove">
+                            </div>
+
+                            <p id="demo"></p>
+                            <p id="demoDelete"></p>
+                            <div class="msgerreur text-danger"></div>
+
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+                <div class="modal-footer">
+                    <button class="btn btn-light btn-shadow font-weight-bold" data-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button class="addToController btn btn-primary btn-shadow font-weight-bold">
+                        Add
+                    </button>
+                </div>
+
+{#                <form action="{{ path('dashboard_create_stock') }}" class="radio_content radio_2" method="POST"#}
+{#                      id="formAddStock" enctype="multipart/form-data">#}
+{#                    <div class="modal-body">#}
+{#                        <div class="row">#}
+
+
+{#                            <div class="col-md-12 d-flex justify-content-center mb-5">#}
+{#                                <div class="col-md-6 ">#}
+{#                                    <div class="form-group ">#}
+{#                                        <label for="product" class="form-group has-float-label mb-1 h5 font-weight-bold text-muted d-flex justify-content-center">#}
+{#                                            Product List#}
+{#                                        </label>#}
+{#                                        <select class="form-control mt-2 " id="product" name="selectProductStandard">#}
+{#                                            <option selected="true" style="display:none;">Select Product</option>#}
+{#                                            {% for product in products %}#}
+{#                                                <option#}
+{#                                                        value="{{ product.id }}">{{ product.productName }}</option>#}
+{#                                            {% endfor %}#}
+{#                                        </select>#}
+{#                                        <hr size="8" width="90%" color="#00365A">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div><br><br>#}
+
+
+
+{#                            <div class="col-md-4 ">#}
+{#                                <div class="form-group " id="firstProductStandard">#}
+{#                                    <label for="Color" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">#}
+{#                                        Color List#}
+{#                                    </label>#}
+{#                                    <select class="form-control mt-2" id="Color" name="colorStandard[]">#}
+{#                                        <option selected="true" style="display:none;">Select Color</option>#}
+{#                                        {% for color in color %}#}
+{#                                            <option#}
+{#                                                    value="{{ color.id }}">{{ color.colorName }}</option>#}
+{#                                        {% endfor %}#}
+{#                                    </select>#}
+{#                                </div>#}
+{#                            </div>#}
+
+{#                            <div class="col-md-4 ">#}
+{#                                <div class="form-group " id="firstProductStandard">#}
+{#                                    <label for="Size" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">#}
+{#                                        Standard Size#}
+{#                                    </label>#}
+{#                                    <select class="form-control mt-2" id="Size" name="sizeStandard[]">#}
+{#                                        <option selected="true" style="display:none;">Standard clothing sizes</option>#}
+{#                                            <option#}
+{#                                                    value="">Standard</option>#}
+{#                                    </select>#}
+{#                                </div>#}
+{#                            </div>#}
+
+{#                            <div class="col-md-2 ">#}
+{#                                <div id="firstProductStandard">#}
+{#                                    <div class="form-group " >#}
+{#                                        <label for="Qty" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted">#}
+{#                                            Qty#}
+{#                                        </label>#}
+{#                                        <div class="qtyProductStandard">#}
+{#                                            <input type="number" step="0.1" class="mt-2 qty form-control chp" id="Qty" placeholder="Qty" name="qtyStandard"  required>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+
+{#                            <div class="col-md-2 ">#}
+{#                                <label for="Color" class="form-group has-float-label mb-1 h6 font-weight-bold text-muted d-flex justify-content-center">#}
+{#                                    &nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+#}
+{#                                </label>#}
+{#                                <div class="form-group d-flex" id="firstProductStandard">#}
+
+{#                                    <span  class="mt-2 removeFieldStandard btn btn-outline-danger handle testRemove mr-2" >-</span>#}
+{#                                    <span class="mt-2 addFieldStandard btn btn-outline-success handle ">+</span>#}
+{#                                </div>#}
+{#                            </div>#}
+
+
+
+{#                                                    <div class="col-md-12" >#}
+{#                            <div class="col-md-4 d-inline-block" id="testColorStandard">#}
+{#                            </div>#}
+{#                            <div class="col-md-4 d-inline-block" id="testSizeStandard">#}
+{#                            </div>#}
+{#                            <div class="col-md-2 d-inline-block" id="testQtyStandard">#}
+{#                            </div>#}
+{#                            <div class="col-md-2 d-inline-block" id="testRemoveStandard">#}
+{#                            </div>#}
+{#                                                    </div>#}
+
+
+
+
+{#                                                    <div class="col-md-12">#}
+{#                                                        <div class="form-group">#}
+{#                                                            <span class="addField btn btn-success handle">+</span>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+
+{#                            <div class="msgerreur text-danger"></div>#}
+
+
+{#                        </div>#}
+
+{#                    </div>#}
+{#                    <div class="modal-footer">#}
+{#                        <button class="btn btn-light btn-shadow font-weight-bold" data-dismiss="modal">#}
+{#                            Cancel#}
+{#                        </button>#}
+{#                        <button class="btn btn-primary btn-shadow font-weight-bold" type="submit">#}
+{#                            Add#}
+{#                        </button>#}
+{#                    </div>#}
+{#                </form>#}
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+

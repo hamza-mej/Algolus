@@ -75,6 +75,7 @@
                         <thead>
                             <tr>
                                 <th>Image</th>
+                                <th>Test</th>
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Description</th>
@@ -96,6 +97,15 @@
                                         <img src="{{ asset('uploads/product/') ~ product.productImage }}" alt="{{ product.productImage }}"
                                              class="list-thumbnail responsive card-img-left img-thumbnail">
                                     </a>
+                                </td>
+
+                                <td>
+                                    <p class="text-muted">
+                                        {% for detail in details %}
+                                            <p> {{ detail in product.getDetails() }}</p>
+{#                                    .getNewColor().colorName#}
+                                        {% endfor %}
+                                    </p>
                                 </td>
 
                                 <td>

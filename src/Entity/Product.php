@@ -71,10 +71,16 @@ class Product
     #[ORM\ManyToMany(targetEntity: Size::class, inversedBy: 'products')]
     private $size;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Details::class)]
+    private $Details;
+
+
+
     public function __construct()
     {
         $this->color = new ArrayCollection();
         $this->size = new ArrayCollection();
+        $this->Details = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -269,6 +275,42 @@ class Product
 
         return $this;
     }
+
+    /**
+     * @return Collection|Details[]
+     */
+    public function getDetails(): Collection
+    {
+        return $this->Details;
+    }
+
+    public function addDetail(Details $detail): self
+    {
+        if (!$this->Details->contains($detail)) {
+            $this->Details[] = $detail;
+            $detail->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetail(Details $detail): self
+    {
+        if ($this->Details->removeElement($detail)) {
+            // set the owning side to null (unless already changed)
+            if ($detail->getProduct() === $this) {
+                $detail->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
+
+
 
 
 }

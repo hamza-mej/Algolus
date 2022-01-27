@@ -9,6 +9,7 @@ use App\Form\ProductFormType;
 use App\Form\SearchAnnonceType;
 use App\Repository\CategoryRepository;
 use App\Repository\ColorRepository;
+use App\Repository\DetailsRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SizeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,8 +23,9 @@ class ProductController extends AbstractController
 {
 
     #[Route('/dashboard-Product', name: 'app_product')]
-    public function index(CategoryRepository $categoryRepository, ColorRepository $colorRepository, SizeRepository $sizeRepository, Request $request,ProductRepository $productRepository,PaginatorInterface $paginator): Response
+    public function index(DetailsRepository $detailsRepository,CategoryRepository $categoryRepository, ColorRepository $colorRepository, SizeRepository $sizeRepository, Request $request,ProductRepository $productRepository,PaginatorInterface $paginator): Response
     {
+        $details = $detailsRepository->findAll();
         $category = $categoryRepository->findAll();
         $color = $colorRepository->findAll();
         $size = $sizeRepository->findAll();
@@ -41,6 +43,7 @@ class ProductController extends AbstractController
             'category' => $category,
             'color' => $color,
             'size' => $size,
+            'details' => $details,
         ]);
     }
 
