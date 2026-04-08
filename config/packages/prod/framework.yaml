@@ -1,0 +1,60 @@
+# Production Environment Overrides
+# This file contains production-specific configurations
+
+imports:
+    - framework.yaml
+
+framework:
+    # Disable debug in production
+    debug: false
+    
+    # Session configuration for production
+    session:
+        handler_id: 'redis'
+        cookie_secure: true
+        cookie_httponly: true
+        cookie_samesite: strict
+        gc_maxlifetime: 2592000
+
+    # Cache configuration for production (uses Redis)
+    cache:
+        app: cache.adapter.redis
+        default_redis_provider: '%env(REDIS_URL)%'
+
+    # Error rendering
+    error_handler:
+        log: true
+
+    # PHP errors logging
+    php_errors:
+        log: true
+
+# Monolog Configuration for Production
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/production.log"
+            level: warning
+            formatter: monolog.formatter.json
+            channels: ['!event', '!doctrine']
+        
+        console:
+            type: console
+            process_psr_3_messages: false
+            channels: ['!event', '!doctrine']
+        
+        # Alternative: send errors to a remote service
+        # sentry:
+        #     type: fingers_crossed
+        #     action_level: error
+        #     handler: buffer
+        #     excluded_404s:
+        #         - ^/
+        # buffer:
+        #     type: buffer
+        #     handler: sentry_handler
+        # sentry_handler:
+        #     type: sentry
+        #     dsn: "%env(SENTRY_DSN)%"
+        #     level: error

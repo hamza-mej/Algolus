@@ -7,9 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
-/**
- * @Vich\Uploadable
- */
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: SecondBannerRepository::class)]
 class SecondBanner
 {
@@ -27,14 +25,7 @@ class SecondBanner
     #[ORM\Column(type: 'string', length: 255)]
     private $image;
 
-    /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     *
-     * @Vich\UploadableField(mapping="secondBanner_image", fileNameProperty="image")
-     *
-     * @var File|null
-     */
-//    #[Vich\UploadableField(mapping: 'product_image', fileNameProperty: 'productImage')]
+    #[Vich\UploadableField(mapping: 'secondBanner_image', fileNameProperty: 'image')]
     private $imageFile;
 
     public function getId(): ?int

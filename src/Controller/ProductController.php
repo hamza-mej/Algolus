@@ -25,13 +25,30 @@ class ProductController extends AbstractController
 {
 
     #[Route('/', name: 'app_algolus')]
-    public function index(CartService $cartService, ProductRepository $productRepository, HomeBlogRepository $homeBlogRepository,BannerRepository $bannerRepository,SecondBannerRepository $secondBannerRepository): Response
-    {
+    public function index(
+        CartService $cartService,
+        ProductRepository $productRepository,
+        HomeBlogRepository $homeBlogRepository,
+        BannerRepository $bannerRepository,
+        SecondBannerRepository $secondBannerRepository
+    ): Response {
+        // Fetch products with eager loading (avoid N+1)
+        $products = $productRepository->createQueryBuilder('p')
+            ->leftJoin('p.category', 'c')
+            ->addSelect('c')
+            ->leftJoin('p.color', 'co')
+            ->addSelect('co')
+            ->leftJoin('p.size', 's')
+            ->addSelect('s')
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults(12)
+            ->getQuery()
+            ->getResult();
 
-        $products = $productRepository->findAll();
         $homeBlog = $homeBlogRepository->findAll();
         $banner = $bannerRepository->findAll();
         $secondBanner = $secondBannerRepository->findAll();
+
         return $this->render('Front/index.html.twig', [
             'products' => $products,
             'items' => $cartService->getFullCart(),
@@ -40,7 +57,6 @@ class ProductController extends AbstractController
             'HomeBlog' => $homeBlog,
             'banner' => $banner,
             'secondBanner' => $secondBanner,
-
         ]);
     }
 
@@ -59,39 +75,28 @@ class ProductController extends AbstractController
     }
 
     #[Route('/shop', name: 'app_product_shop')]
-
-    public function shop(DetailsRepository $detailsRepository, CartService $cartService, ProductRepository $productRepository, Request $request,$maxItemPerPage=2,
-                         ): Response
-    {
-
-//        if($request->isXmlHttpRequest()){
-//
-//            $s = $request->getContent();
-////            $param = json_decode($s);
-//
-//
-//
-//            $SizeOfColorView = $detailsRepository->findSizeOfColor(84, $s);
-//
-//            dd($SizeOfColorView);
-//
-//        }
-
-//        $data = $productRepository->findAll();
-//        $products = $paginator->paginate(
-//            $data,
-//            $request->query->getInt('page', 1),
-//            2
-//        );
+    public function shop(
+        DetailsRepository $detailsRepository, 
+        CartService $cartService, 
+        ProductRepository $productRepository, 
+        Request $request
+    ): Response {
         $product = new Product();
-
         $data = new SearchData();
         $data->page = $request->get('page', 1);
+        $data->maxItemPerPage = max(1, min(60, (int) $request->query->get('maxItemPerPage', $data->maxItemPerPage)));
+        
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
-        [$min , $max] = $productRepository->findMinMax($data);
-        $products = $productRepository->findSearch($data, $maxItemPerPage=20);
-        if ($request->get('ajax')){
+        
+        // Get min/max prices (cached query ideally)
+        [$min, $max] = $productRepository->findMinMax($data);
+        
+        // Get paginated products with optimized queries
+        $products = $productRepository->findSearch($data, $data->maxItemPerPage);
+        
+        // AJAX request - return JSON with rendered partials
+        if ($request->get('ajax')) {
             return new JsonResponse([
                 'content' => $this->renderView('Front/Product/_product.html.twig', ['products' => $products]),
                 'contentShow' => $this->renderView('Front/Product/_product_show.html.twig', ['products' => $products]),
@@ -102,8 +107,7 @@ class ProductController extends AbstractController
             ]);
         }
 
-
-
+        // Regular page load
         return $this->render('Front/Product/index.html.twig', [
             'products' => $products,
             'product' => $product,

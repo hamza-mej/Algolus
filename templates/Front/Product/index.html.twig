@@ -33,16 +33,23 @@
                                 <div class="product-sorting-wrapper">
                                     <div class="product-shorting shorting-style">
                                         <label for="viewLabel">View:</label>
-{#                                        <select id="viewLabel">#}
-{#                                            <option value=""> 20</option>#}
-{#                                            <option value=""> 23</option>#}
-{#                                            <option value=""> 30</option>#}
-{#                                        </select>#}
-                                        <select   name="maxItemPerPage" id="maxItemPerPage">
-                                            <option value="2">2</option>
-                                            <option value="4">4</option>
-                                            <option value="6">6</option>
-                                        </select>
+                                        {% set currentView = app.request.query.get('maxItemPerPage')|default('6') %}
+                                        <div class="view-select" data-view-select>
+                                            <button type="button" id="viewLabel" class="view-select-trigger" data-view-trigger aria-haspopup="listbox" aria-expanded="false">
+                                                <span data-view-value>{{ currentView }}</span>
+                                                <i class="la la-angle-down" aria-hidden="true"></i>
+                                            </button>
+                                            <div class="view-select-menu" data-view-menu role="listbox" aria-label="Items per page">
+                                                <button type="button" class="view-select-option{{ currentView == '6' ? ' is-selected' : '' }}" data-view-option="6">6</button>
+                                                <button type="button" class="view-select-option{{ currentView == '9' ? ' is-selected' : '' }}" data-view-option="9">9</button>
+                                                <button type="button" class="view-select-option{{ currentView == '12' ? ' is-selected' : '' }}" data-view-option="12">12</button>
+                                            </div>
+                                            <select name="maxItemPerPage" id="maxItemPerPage" class="view-select-native" tabindex="-1" aria-hidden="true">
+                                                <option value="6" {{ currentView == '6' ? 'selected' : '' }}>6</option>
+                                                <option value="9" {{ currentView == '9' ? 'selected' : '' }}>9</option>
+                                                <option value="12" {{ currentView == '12' ? 'selected' : '' }}>12</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="product-show shorting-style js-filter-sorting">
 {#                                        <label for="sortLabel">Sort by:</label>#}
@@ -110,12 +117,12 @@
                                         <ul>
                                             <li>
                                                 <div class="sidebar-widget-list-left ">
-                                                    {{ form_row(formFilter.categories,
-                                                        { 'attr' : {'class' : ''} })
-                                                    }}
-{#                                                    <a href="#">Green <span>7</span> </a>#}
-{#                                                    <span class="checkmark"></span>#}
-                                                    <span class="checkmark"></span>
+                                                    {% for choice in formFilter.categories %}
+                                                        <div class="filter-choice-row">
+                                                            {{ form_widget(choice) }}
+                                                            {{ form_label(choice) }}
+                                                        </div>
+                                                    {% endfor %}
                                                 </div>
                                             </li>
                                         </ul>
@@ -132,7 +139,7 @@
                                 <div class="shop-price-filter mt-35 shop-sidebar-border pt-40 sidebar-widget">
                                     <h4 class="sidebar-title">Price Filter</h4>
                                     <div class="price-filter mt-20">
-                                        <span>Range:  ${{ min }}.00 - {{ max }}.00 </span>
+                                        <span>Range:  $0.00 - ${{ max|number_format(2, '.', '') }} </span>
 
 {#                                        <div class="price-slider-amount" >#}
 {#                                            <div class="label-input">#}
@@ -146,7 +153,7 @@
 {#                                            </div>#}
 {#                                            <button type="button">Filter</button>#}
 {#                                        </div>#}
-                                        <div class="price-slider-amount mb-4">
+                                        <div class="price-slider-amount mb-4" style="display: none;">
                                             <div class="d-inline-block rounded  " style="width: 110px;">
                                                 {{ form_row(formFilter.min,
                                                     { 'attr' : {'class' : 'pl-3'} }) }}
@@ -156,9 +163,8 @@
                                                     { 'attr' : {'class' : 'pl-3'} }) }}
                                             </div>
                                         </div>
-                                        <div id="slider" data-min="{{ min }}" data-max="{{ max }}"></div>
-
-{#                                        <div id="slider"></div>#}
+                                        <div id="slider-range" data-min="{{ min }}" data-max="{{ max }}"></div>
+                                        <input type="text" id="amount" placeholder="Add Your Price" readonly />
                                     </div>
                                 </div>
                                 <div class="sidebar-widget shop-sidebar-border pt-40 mt-40">
@@ -168,11 +174,10 @@
                                         <ul>
                                             <li>
                                                 <div class="sidebar-widget-list-left">
-
-{#                                                    <label for="onSale">En promotion</label>#}
-                                                    {{ form_row(formFilter.onSale) }}
-{#                                                    <span class="checkmark"></span>#}
-
+                                                    <div class="filter-choice-row">
+                                                        {{ form_widget(formFilter.onSale) }}
+                                                        {{ form_label(formFilter.onSale) }}
+                                                    </div>
                                                 </div>
                                             </li>
                                         </ul>
@@ -186,8 +191,12 @@
                                         <ul>
                                             <li>
                                                 <div class="sidebar-widget-list-left ">
-                                                    {{ form_row(formFilter.color) }}
-{#                                                    <span class="checkmark"></span>#}
+                                                    {% for choice in formFilter.color %}
+                                                        <div class="filter-choice-row">
+                                                            {{ form_widget(choice) }}
+                                                            {{ form_label(choice) }}
+                                                        </div>
+                                                    {% endfor %}
                                                 </div>
                                             </li>
                                         </ul>
@@ -200,7 +209,12 @@
                                         <ul>
                                             <li>
                                                 <div class="sidebar-widget-list-left">
-                                                    {{ form_row(formFilter.size) }}
+                                                    {% for choice in formFilter.size %}
+                                                        <div class="filter-choice-row">
+                                                            {{ form_widget(choice) }}
+                                                            {{ form_label(choice) }}
+                                                        </div>
+                                                    {% endfor %}
                                                 </div>
                                             </li>
 

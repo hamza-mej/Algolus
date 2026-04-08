@@ -7,18 +7,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 
-/**
- * @Vich\Uploadable
- * @ORM\Table(name="product", indexes={@ORM\Index(columns={"product_name", "product_description"}, flags={"fulltext"})})
- */
+#[Vich\Uploadable]
+#[ORM\Table(name: 'product')]
+#[ORM\Index(columns: ['product_name', 'product_description'], flags: ['fulltext'])]
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-#[Entity, HasLifecycleCallbacks]
-//#[Table]
-//#[UniqueConstraint(name: "product", columns=["product_name", "product_description"])]
+#[ORM\HasLifecycleCallbacks]
 class Product
 {
     #[ORM\Id]
@@ -41,14 +38,7 @@ class Product
     #[ORM\Column(type: 'text', nullable: true)]
     private $productDescription;
 
-    /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     *
-     * @Vich\UploadableField(mapping="product_image", fileNameProperty="productImage")
-     *
-     * @var File|null
-     */
-//    #[Vich\UploadableField(mapping: 'product_image', fileNameProperty: 'productImage')]
+    #[Vich\UploadableField(mapping: 'product_image', fileNameProperty: 'productImage')]
     private $imageFile;
 
     #[ORM\Column(type: 'datetime_immutable', options: [ "default" => "CURRENT_TIMESTAMP" ])]
@@ -58,7 +48,7 @@ class Product
     private $updatedAt;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'Product')]
-    #[Assert\NotBlanck]
+    #[Assert\NotBlank]
     private $category;
 
     #[ORM\Column(type: 'boolean', options: [ "default" => 0 ])]

@@ -1,0 +1,50 @@
+# Redis Configuration for Caching and Sessions in Production
+# https://symfony.com/doc/current/components/cache/adapters/redis_adapter.html
+
+framework:
+    cache:
+        default_redis_provider: '%env(REDIS_URL)%'
+        pools:
+            # System cache pool for framework operations
+            cache.system:
+                adapter: cache.adapter.redis
+                provider: '%env(REDIS_URL)%'
+                default_lifetime: 3600
+
+            # Application-level cache pool
+            cache.app:
+                adapter: cache.adapter.redis
+                provider: '%env(REDIS_URL)%'
+                default_lifetime: 86400
+
+            # Product cache pool (24 hour TTL)
+            cache.products:
+                adapter: cache.adapter.redis
+                provider: '%env(REDIS_URL)%'
+                default_lifetime: 86400
+
+            # Search results cache pool (1 hour TTL)
+            cache.search:
+                adapter: cache.adapter.redis
+                provider: '%env(REDIS_URL)%'
+                default_lifetime: 3600
+
+    session:
+        handler_id: 'redis'
+        cookie_secure: true
+        cookie_httponly: true
+        cookie_samesite: strict
+        gc_maxlifetime: 2592000  # 30 days
+
+# Redis client configuration
+services:
+    redis:
+        class: Redis
+        calls:
+            - method: connect
+              arguments:
+                  - '%env(REDIS_HOST)%'
+                  - '%env(int:REDIS_PORT)%'
+
+    snc_redis.default_client:
+        factory: ['@redis', 'connect']

@@ -1,7 +1,7 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
     secret: '%env(APP_SECRET)%'
-    #csrf_protection: true
+    csrf_protection: true
     http_method_override: false
 
     # Enables session support. Note that the session will ONLY be started if you read or write from it.
@@ -9,13 +9,52 @@ framework:
     session:
         handler_id: null
         cookie_secure: auto
-        cookie_samesite: lax
+        cookie_samesite: strict
+        cookie_httponly: true
         storage_factory_id: session.storage.factory.native
 
-    #esi: true
-    #fragments: true
+    # HTTP Cache for static assets
+    http_cache:
+        debug: '%kernel.debug%'
+
+    # HTTP Client configuration
+    http_client:
+        enabled: true
+
+    # Use Redis for session in production (configure in prod config)
+    # session:
+    #     handler_id: 'redis'
+
+    # Enable trusted proxies for production
+    # trusted_proxies: '127.0.0.1,REMOTE_ADDR'
+    # trusted_headers: 'X-Forwarded-For,X-Forwarded-Proto,X-Forwarded-Host'
+
     php_errors:
         log: true
+
+    # Cache configuration - don't override reserved cache.app and cache.system
+    cache:
+        app: cache.adapter.filesystem
+
+when@prod:
+    framework:
+        # Use Redis for caching in production
+        cache:
+            default_redis_provider: 'redis://%env(REDIS_URL)%'
+            pools:
+                cache.system:
+                    adapter: cache.adapter.redis
+                    provider: 'redis://%env(REDIS_URL)%'
+                cache.app:
+                    adapter: cache.adapter.redis
+                    provider: 'redis://%env(REDIS_URL)%'
+        
+        # Use Redis for sessions in production
+        session:
+            handler_id: 'redis'
+            cookie_secure: true
+            cookie_httponly: true
+            cookie_samesite: strict
 
 when@test:
     framework:

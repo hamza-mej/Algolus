@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@hotwired/stimulus": "^3.0.0",
-    "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/Resources/assets",
+    "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/assets",
     "nouislider": "^15.5.0"
   }
 }

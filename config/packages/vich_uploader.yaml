@@ -3,30 +3,23 @@ vich_uploader:
 
     mappings:
         product_image:
-            uri_prefix: /images/products
-            upload_destination: '%kernel.project_dir%/public/images/products'
-        #            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            uri_prefix: /uploads/product
+            upload_destination: '%kernel.project_dir%/public/uploads/product'
         blog_image:
-            uri_prefix: /images/blog
-            upload_destination: '%kernel.project_dir%/public/images/blog'
-        #            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            uri_prefix: /uploads/blog
+            upload_destination: '%kernel.project_dir%/public/uploads/blog'
         aboutUs_image:
-            uri_prefix: assets/images/banner
-            upload_destination: '%kernel.project_dir%/public/assets/images/banner'
-        #            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            uri_prefix: /uploads/aboutUs
+            upload_destination: '%kernel.project_dir%/public/uploads/aboutUs'
         homeBlog_image:
-            uri_prefix: assets/images/banner
-            upload_destination: '%kernel.project_dir%/public/assets/images/banner'
-            #            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            uri_prefix: /uploads/homeBlog
+            upload_destination: '%kernel.project_dir%/public/uploads/homeBlog'
         banner_image:
-            uri_prefix: assets/images/slider
-            upload_destination: '%kernel.project_dir%/public/assets/images/slider'
-            #            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            uri_prefix: /uploads/banner
+            upload_destination: '%kernel.project_dir%/public/uploads/banner'
         secondBanner_image:
-            uri_prefix: assets/images/bg
-            upload_destination: '%kernel.project_dir%/public/assets/images/bg'
-            #            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            uri_prefix: /uploads/secondBanner
+            upload_destination: '%kernel.project_dir%/public/uploads/secondBanner'
         category_image:
-            uri_prefix: /images/categories
-            upload_destination: '%kernel.project_dir%/public/images/categories'
-        #            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            uri_prefix: /uploads/category
+            upload_destination: '%kernel.project_dir%/public/uploads/category'

@@ -13,6 +13,11 @@ class SearchData
     public $page = 1;
 
     /**
+     * @var int
+     */
+    public $maxItemPerPage = 6;
+
+    /**
      * @var string
      */
     public $q = '';

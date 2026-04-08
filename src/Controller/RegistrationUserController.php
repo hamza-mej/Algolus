@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RegistrationUserController extends AbstractController
 {
     #[Route('/registerUser', name: 'app_register_user')]
-    public function register(CartService $cartService, Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
+    public function register(CartService $cartService, Request $request, UserPasswordHasherInterface $userPasswordHasherInterface, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -30,7 +30,6 @@ class RegistrationUserController extends AbstractController
                 )
             );
 
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email

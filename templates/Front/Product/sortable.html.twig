@@ -1,14 +1,20 @@
-<a{% for attr, value  in options | merge({class: 'btn btn-secondary'}) %} {{ attr }}="{{ value }}"{% endfor %}>
-<span class="float-right">
-        {% if sorted %}
-            {% if direction == 'desc' %}
-                <i class="fa fa-sort-down"></i>
-            {% else %}
-                <i class="fa fa-sort-up"></i>
-            {% endif %}
-        {% else %}
-            <i class="fa fa-sort"></i>
-        {% endif %}
+{% set routeName = app.request.attributes.get('_route') %}
+{% set routeParams = app.request.attributes.get('_route_params')|default({}) %}
+{% set queryParams = app.request.query.all %}
+{% set baseParams = routeParams|merge(queryParams)|merge({'sort': 'p.productPrice'}) %}
+{% set ascHref = path(routeName, baseParams|merge({'direction': 'asc'})) %}
+{% set descHref = path(routeName, baseParams|merge({'direction': 'desc'})) %}
+{% set currentSort = app.request.query.get('sort')|default('') %}
+{% set currentDirection = app.request.query.get('direction')|default('')|lower %}
+{% set isPriceSort = currentSort == 'p.productPrice' %}
+{% set ascActive = isPriceSort and currentDirection == 'asc' %}
+{% set descActive = isPriceSort and currentDirection == 'desc' %}
+{% set linkClass = 'price-sort-btn' %}
+
+<span class="{{ linkClass }}">
+    <span class="price-sort-label">{{ title }}</span>
+    <span class="price-sort-arrows" aria-hidden="true">
+        <a href="{{ ascHref }}" class="price-arrow-link price-arrow-up-link{{ ascActive ? ' is-active' : '' }}" aria-label="Sort price low to high"></a>
+        <a href="{{ descHref }}" class="price-arrow-link price-arrow-down-link{{ descActive ? ' is-active' : '' }}" aria-label="Sort price high to low"></a>
     </span>
-{{ title }}
-</a>
+</span>

@@ -18,7 +18,6 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
-#            $uploadDir: '%upload_dir%'
             $stripeSk: "%env(STRIPE_SK)%"
 
     # makes classes in src/ available to be used as services
@@ -31,5 +30,13 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # Security Headers Service
+    App\Service\SecurityHeadersService:
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: addSecurityHeaders }
+
+    # HTTP Cache Service
+    App\Service\HttpCacheService:
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: setCacheHeaders }
+

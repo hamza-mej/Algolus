@@ -1,0 +1,27 @@
+# Security Headers Configuration
+# Adds important security headers to all responses via middleware
+# Headers are set via the response listener below
+
+parameters:
+    security_headers:
+        X-Content-Type-Options: 'nosniff'
+        X-Frame-Options: 'SAMEORIGIN'
+        X-XSS-Protection: '1; mode=block'
+        Referrer-Policy: 'strict-origin-when-cross-origin'
+        Strict-Transport-Security: 'max-age=31536000; includeSubDomains'
+        Content-Security-Policy: "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self';"
+
+# Security headers are configured at the web server level (Nginx/Apache)
+# For Nginx, add to server block:
+#     add_header X-Content-Type-Options "nosniff" always;
+#     add_header X-Frame-Options "SAMEORIGIN" always;
+#     add_header X-XSS-Protection "1; mode=block" always;
+#     add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+#     add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+#
+# For Apache, add to .htaccess or VirtualHost:
+#     Header always set X-Content-Type-Options "nosniff"
+#     Header always set X-Frame-Options "SAMEORIGIN"
+#     Header always set X-XSS-Protection "1; mode=block"
+#     Header always set Referrer-Policy "strict-origin-when-cross-origin"
+#     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"

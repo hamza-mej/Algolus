@@ -97,7 +97,7 @@ class BlogController extends AbstractController
     public function myAccount(CartService $cartService): Response
     {
 
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login_user');
         }
 

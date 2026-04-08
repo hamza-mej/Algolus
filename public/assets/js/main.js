@@ -738,18 +738,49 @@
     --------------------- */
     var sliderrange = $('#slider-range');
     var amountprice = $('#amount');
+    var minInput = $('input[name="min"]');
+    var maxInput = $('input[name="max"]');
+    
     $(function() {
-        sliderrange.slider({
-            range: true,
-            min: 0,
-            max: 1200,
-            values: [0, 800],
-            slide: function(event, ui) {
-                amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
+        if (sliderrange.length) {
+            // Get min/max from data attributes or use defaults
+            var dataMin = parseFloat(sliderrange.data('min')) || 0;
+            var dataMax = parseFloat(sliderrange.data('max')) || dataMin;
+            var minVal = parseFloat(minInput.val());
+            var maxVal = parseFloat(maxInput.val());
+
+            if (isNaN(minVal)) {
+                minVal = dataMin;
             }
-        });
-        amountprice.val("$" + sliderrange.slider("values", 0) +
-            " - $" + sliderrange.slider("values", 1));
+            if (isNaN(maxVal)) {
+                maxVal = dataMax;
+            }
+
+            minVal = Math.max(dataMin, Math.min(minVal, dataMax));
+            maxVal = Math.max(minVal, Math.min(maxVal, dataMax));
+             
+            sliderrange.slider({
+                range: true,
+                min: dataMin,
+                max: dataMax,
+                step: 0.01,
+                values: [minVal, maxVal],
+                slide: function(event, ui) {
+                    amountprice.val("$" + ui.values[0].toFixed(2) + " - $" + ui.values[1].toFixed(2));
+                    minInput.val(ui.values[0]);
+                    maxInput.val(ui.values[1]);
+                },
+                stop: function(event, ui) {
+                    minInput.val(ui.values[0]);
+                    maxInput.val(ui.values[1]);
+                    if (minInput.length) {
+                        minInput[0].dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                }
+            });
+            amountprice.val("$" + sliderrange.slider("values", 0).toFixed(2) +
+                " - $" + sliderrange.slider("values", 1).toFixed(2));
+        }
     });
     
     

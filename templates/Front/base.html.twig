@@ -29,6 +29,8 @@
         <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.css') }}" />
          <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css') }}">
+        <!-- AJAX UI Components CSS -->
+        <link rel="stylesheet" href="{{ asset('/assets/css/ajax-ui.css') }}?v={{ 'now'|date('YmdHis') }}">
 
     {% endblock %}
 
@@ -608,7 +610,27 @@
         <script src="{{ asset('/assets/js/main.js') }}"></script>
         <script type="module" src="{{ asset('/assets/js/app.js') }}"></script>
         <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.js') }}" integrity="sha512-ZKqmaRVpwWCw7S7mEjC89jDdWRD/oMS0mlfH96mO0u3wrPYoN+lXmqvyptH4P9mY6zkoPTSy5U2SwKVXRY5tYQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+        <!-- AJAX Controllers -->
+        <script src="{{ asset('/assets/js/cart-controller.js') }}"></script>
+        <script src="{{ asset('/assets/js/filter-controller.js') }}"></script>
+        <script src="{{ asset('/assets/js/search-controller.js') }}"></script>
+        <script src="{{ asset('/assets/js/form-controller.js') }}"></script>
+        <!-- Phase 3: Reviews, Wishlist, Analytics -->
+        <script src="{{ asset('/assets/js/reviews-controller.js') }}"></script>
+        <script src="{{ asset('/assets/js/wishlist-controller.js') }}"></script>
+        <script src="{{ asset('/assets/js/analytics-tracker.js') }}"></script>
+        <!-- Phase 4: Notifications, Recommendations, Admin Dashboard -->
+        <script src="{{ asset('/assets/js/notifications-controller.js') }}"></script>
+        <script src="{{ asset('/assets/js/recommendations-controller.js') }}"></script>
+        <script src="{{ asset('/assets/js/admin-dashboard-controller.js') }}"></script>
+        <!-- Phase 5: Email, Inventory, Analytics, SEO -->
+        <script src="{{ asset('/assets/js/newsletter-controller.js') }}"></script>
+        <script src="{{ asset('/assets/js/analytics-dashboard.js') }}"></script>
+        <!-- Phase 6: Subscriptions, Loyalty, Support, A/B Testing, Webhooks -->
+        <script src="{{ asset('/assets/js/subscription-manager.js') }}"></script>
+        <script src="{{ asset('/assets/js/support-ab-testing.js') }}"></script>
+        <!-- Price Slider -->
+        <script src="{{ asset('/assets/js/price-slider-controller.js') }}"></script>
 
     {% endblock %}
 </body>

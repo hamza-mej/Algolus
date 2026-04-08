@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Entity\User;
 use App\Form\EditRegistrationFormType;
 use App\Service\Cart\CartService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class CheckoutController extends AbstractController
 {
     #[Route('/checkout', name: 'app_checkout')]
-    public function index(CartService $cartService, Request $request): Response
+    public function index(CartService $cartService, Request $request, EntityManagerInterface $entityManager): Response
     {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login_user');
         }
 
@@ -27,7 +28,6 @@ class CheckoutController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email

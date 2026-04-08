@@ -2,7 +2,7 @@
     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
         <div class="product-wrap mb-35">
             <div class="product-img mb-15">
-                <a href="{{ path('app_shop_show', {id: product.id})  }}"><img src="{{ asset('uploads/product/') ~ product.productImage }}" alt="{{ product.productName }}"></a>
+                <a href="{{ path('app_shop_show', {id: product.id})  }}"><img loading="lazy" src="{{ asset('uploads/product/') ~ product.productImage }}" alt="{{ product.productName }}"></a>
                 {% if product.onSale %}
                     <span class="price-dec" style="font-size: 12px">Promo</span>
                 {% endif %}

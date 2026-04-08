@@ -10,11 +10,8 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
-/**
- * @Vich\Uploadable
- */
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-//#[Vich\Uploadable]
 
 class Category
 {
@@ -26,11 +23,7 @@ class Category
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $CategoryName;
 
-    /**
-     * @Vich\UploadableField(mapping="category_image", fileNameProperty="CategoryImage")
-     * @var File|null
-     */
-//    #[Vich\UploadableField(mapping: "category_image", fileNameProperty: "CategoryImage")]
+    #[Vich\UploadableField(mapping: 'category_image', fileNameProperty: 'CategoryImage')]
     private $imageFile;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

@@ -55,15 +55,14 @@ class ProductRepository extends ServiceEntityRepository
      * @param SearchData $search
      * @return PaginationInterface
      */
-    public function findSearch(SearchData $search,$maxItemPerPage=2): PaginationInterface
+    public function findSearch(SearchData $search,$maxItemPerPage=6): PaginationInterface
     {
 
         $query = $this->getSearchQuery($search)->getQuery();
         return $this->paginator->paginate(
             $query,
             $search->page,
-            5
-//            $maxItemPerPage
+            max(1, (int) $maxItemPerPage)
         );
     }
 
@@ -75,60 +74,75 @@ class ProductRepository extends ServiceEntityRepository
         $results = $this->getSearchQuery($search, true)
             ->select('MIN(p.productPrice) as min', 'MAX(p.productPrice) as max')
             ->getQuery()
+            ->setResultCacheId('product_min_max_prices')
+            ->setResultCacheLifetime(3600)
+            ->enableResultCache()
             ->getScalarResult();
         return [(int)$results[0]['min'], (int)$results[0]['max']];
     }
 
     private function getSearchQuery(SearchData $search, $ignorePrice = false): QueryBuilder
     {
+        // Optimized eager loading - only select once with multiple joins
         $query = $this
             ->createQueryBuilder('p')
-            ->select('c','p')
-            ->join('p.category','c')
-            ->select('color','p')
-            ->join('p.color','color')
-            ->select('size','p')
-            ->join('p.size','size');
+            ->leftJoin('p.category', 'c')
+            ->addSelect('c')
+            ->leftJoin('p.color', 'color')
+            ->addSelect('color')
+            ->leftJoin('p.size', 'size')
+            ->addSelect('size');
 
+        // Search filter
         if (!empty($search->q)) {
             $query = $query
                 ->andWhere('p.productName LIKE :q')
                 ->setParameter('q', "%{$search->q}%");
         }
 
-        if (!empty($search->min) && $ignorePrice === false ) {
+        // Price filters
+        if ($search->min !== null && $search->min !== '' && $ignorePrice === false) {
             $query = $query
                 ->andWhere('p.productPrice >= :min')
                 ->setParameter('min', $search->min);
         }
 
-        if (!empty($search->max) && $ignorePrice === false) {
+        if ($search->max !== null && $search->max !== '' && $ignorePrice === false) {
             $query = $query
                 ->andWhere('p.productPrice <= :max')
                 ->setParameter('max', $search->max);
         }
 
+        // Sale filter
         if (!empty($search->onSale)) {
             $query = $query
                 ->andWhere('p.onSale = 1');
         }
 
+        // Category filter
         if (!empty($search->categories)) {
             $query = $query
                 ->andWhere('c.id IN (:categories)')
                 ->setParameter('categories', $search->categories);
         }
 
+        // Color filter
         if (!empty($search->color)) {
             $query = $query
                 ->andWhere('color.id IN (:color)')
                 ->setParameter('color', $search->color);
         }
 
+        // Size filter
         if (!empty($search->size)) {
             $query = $query
                 ->andWhere('size.id IN (:size)')
                 ->setParameter('size', $search->size);
+        }
+
+        // Order by product ID descending for consistency and performance
+        if (!$ignorePrice) {
+            $query = $query->orderBy('p.id', 'DESC');
         }
 
         return $query;

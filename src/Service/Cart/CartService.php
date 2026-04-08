@@ -4,20 +4,27 @@ namespace App\Service\Cart;
 
 use App\Entity\Product;
 use App\Repository\ProductRepository;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CartService {
 
-    protected $session;
+    protected $requestStack;
     protected $productRepository;
 
-    public function __construct(SessionInterface $session,ProductRepository $productRepository){
-        $this->session = $session;
+    public function __construct(RequestStack $requestStack, ProductRepository $productRepository){
+        $this->requestStack = $requestStack;
         $this->productRepository = $productRepository;
     }
 
+    protected function getSession(): SessionInterface
+    {
+        return $this->requestStack->getSession();
+    }
+
     public function add(Product $product){
-        $panier = $this->session->get('panier', []);
+        $session = $this->getSession();
+        $panier = $session->get('panier', []);
 
         if (!empty($panier[$product->getId()])){
             $panier[$product->getId()]++;
@@ -25,28 +32,29 @@ class CartService {
             $panier[$product->getId()] = 1;
         }
 
-        $this->session->set('panier', $panier);
+        $session->set('panier', $panier);
     }
 
     public function remove(Product $product){
 
-        $panier = $this->session->get('panier', []);
+        $session = $this->getSession();
+        $panier = $session->get('panier', []);
 
         if (!empty($panier[$product->getId()])){
             unset($panier[$product->getId()]);
         }
 
-        $this->session->set('panier', $panier);
+        $session->set('panier', $panier);
     }
 
     public function removeAll(){
 
-        $this->session->clear();
+        $this->getSession()->clear();
     }
 
     public function getFullCart() : array{
 
-        $panier = $this->session->get('panier', []);
+        $panier = $this->getSession()->get('panier', []);
 
         $panierWithData = [];
 
